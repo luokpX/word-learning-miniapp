@@ -40,9 +40,10 @@
 .flashcard-container {
   flex: 1;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  padding: 10rpx;
+  padding: 15rpx;
+  padding-top: 30rpx;
   min-height: 500rpx;
 }
 
