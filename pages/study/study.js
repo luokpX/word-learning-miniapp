@@ -24,6 +24,14 @@ Page({
     this.loadWordList()
   },
 
+  onShow() {
+    if (typeof this.getTabBar === 'function' && this.getTabBar()) {
+      this.getTabBar().setData({
+        currentIndex: 2
+      })
+    }
+  },
+
   onUnload() {
     audioService.stopAudio()
   },

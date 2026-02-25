@@ -1,0 +1,37 @@
+<view class="tab-bar">
+  <view 
+    class="tab-item {{currentIndex === 0 ? 'active' : ''}}" 
+    data-index="0" 
+    data-path="pages/index/index"
+    bindtap="switchTab">
+    <text class="tab-icon">🏠</text>
+    <text class="tab-text">首页</text>
+  </view>
+  
+  <view 
+    class="tab-item {{currentIndex === 1 ? 'active' : ''}}" 
+    data-index="1" 
+    data-path="pages/wordbook/wordbook"
+    bindtap="switchTab">
+    <text class="tab-icon">📖</text>
+    <text class="tab-text">单词本</text>
+  </view>
+  
+  <view 
+    class="tab-item {{currentIndex === 2 ? 'active' : ''}}" 
+    data-index="2" 
+    data-path="pages/study/study"
+    bindtap="switchTab">
+    <text class="tab-icon">📚</text>
+    <text class="tab-text">学习</text>
+  </view>
+  
+  <view 
+    class="tab-item {{currentIndex === 3 ? 'active' : ''}}" 
+    data-index="3" 
+    data-path="pages/profile/profile"
+    bindtap="switchTab">
+    <text class="tab-icon">👤</text>
+    <text class="tab-text">我的</text>
+  </view>
+</view>

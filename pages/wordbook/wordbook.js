@@ -16,6 +16,11 @@ Page({
 
   onShow() {
     this.loadMasteredStatus()
+    if (typeof this.getTabBar === 'function' && this.getTabBar()) {
+      this.getTabBar().setData({
+        currentIndex: 1
+      })
+    }
   },
 
   loadWords() {

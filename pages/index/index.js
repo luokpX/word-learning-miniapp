@@ -20,6 +20,11 @@ Page({
 
   onShow() {
     this.loadProgress()
+    if (typeof this.getTabBar === 'function' && this.getTabBar()) {
+      this.getTabBar().setData({
+        currentIndex: 0
+      })
+    }
   },
 
   loadProgress() {
