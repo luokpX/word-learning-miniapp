@@ -46,6 +46,7 @@
   justify-content: center;
   padding: 15rpx;
   padding-top: 20rpx;
+  padding-bottom: 2rpx;
   min-height: 0;
 }
 
