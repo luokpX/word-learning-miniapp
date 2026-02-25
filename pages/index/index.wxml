@@ -1,7 +1,7 @@
 <view class="container">
   <view class="header">
     <view class="greeting">
-      <text class="greeting-text">你好！</text>
+      <text class="greeting-text">桃桃，你好！</text>
       <text class="greeting-subtitle">今天想学几个单词？</text>
     </view>
   </view>
