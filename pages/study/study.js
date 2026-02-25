@@ -69,7 +69,6 @@ Page({
     const url = e.currentTarget.dataset.url
     if (url) {
       this.setData({ isPlaying: true })
-      audioService.setPlaybackRate(this.data.playSpeed)
       audioService.playWordAudio(url, {
         onEnded: () => {
           this.setData({ isPlaying: false })
@@ -78,6 +77,12 @@ Page({
           this.setData({ isPlaying: false })
         }
       })
+      
+      setTimeout(() => {
+        if (this.data.isPlaying) {
+          this.setData({ isPlaying: false })
+        }
+      }, 2500)
     }
   },
 
