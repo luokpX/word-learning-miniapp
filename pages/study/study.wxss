@@ -48,7 +48,7 @@
 
 .flashcard {
   width: 100%;
-  height: 600rpx;
+  height: 450rpx;
   perspective: 1000rpx;
   cursor: pointer;
 }
@@ -194,19 +194,18 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 15rpx;
-  padding: 20rpx 20rpx 30rpx;
+  gap: 10rpx;
+  padding: 15rpx;
 }
 
 .action-btn {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  padding: 20rpx 30rpx;
-  border-radius: 20rpx;
-  min-width: 140rpx;
-  flex: 1;
-  max-width: 160rpx;
+  padding: 25rpx 35rpx;
+  border-radius: 16rpx;
+  min-width: 200rpx;
+  gap: 10rpx;
 }
 
 .action-btn.wrong {
@@ -230,8 +229,7 @@
 }
 
 .btn-icon {
-  font-size: 48rpx;
-  margin-bottom: 10rpx;
+  font-size: 36rpx;
 }
 
 .btn-text {
