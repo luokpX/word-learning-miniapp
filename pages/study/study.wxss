@@ -46,7 +46,7 @@
   justify-content: center;
   padding: 10rpx;
   padding-top: 15rpx;
-  padding-bottom: 0;
+  margin-bottom: -10rpx;
   min-height: 0;
 }
 
@@ -198,8 +198,8 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 10rpx;
-  padding: 2rpx 20rpx;
+  gap: 0;
+  padding: 0 20rpx;
 }
 
 .action-btn {
