@@ -1,7 +1,7 @@
 class AudioService {
   constructor() {
     this.audioContext = null
-    this.currentAudio = null
+    this.currentUrl = ''
   }
 
   playWordAudio(url, options = {}) {
@@ -10,39 +10,47 @@ class AudioService {
       return Promise.reject(new Error('Audio URL is empty'))
     }
 
-    return new Promise((resolve, reject) => {
-      if (this.audioContext) {
-        this.audioContext.destroy()
+    const self = this
+
+    if (this.audioContext && this.currentUrl === url) {
+      this.audioContext.stop()
+    }
+
+    if (this.audioContext) {
+      this.audioContext.destroy()
+    }
+
+    this.audioContext = wx.createInnerAudioContext()
+    this.audioContext.src = url
+    this.audioContext.autoplay = true
+    this.currentUrl = url
+
+    this.audioContext.onPlay(() => {
+      console.log('Audio started playing')
+      if (options.onPlay) {
+        options.onPlay()
       }
+    })
 
-      this.audioContext = wx.createInnerAudioContext()
-      this.audioContext.src = url
-      this.audioContext.autoplay = true
+    this.audioContext.onEnded(() => {
+      console.log('Audio ended')
+      if (options.onEnded) {
+        options.onEnded()
+      }
+    })
 
-      this.audioContext.onPlay(() => {
-        console.log('Audio started playing')
-        if (options.onPlay) {
-          options.onPlay()
-        }
-      })
+    this.audioContext.onError((err) => {
+      console.error('Audio error:', err)
+      if (options.onError) {
+        options.onError(err)
+      }
+    })
 
-      this.audioContext.onEnded(() => {
-        console.log('Audio ended')
-        resolve()
-        if (options.onEnded) {
-          options.onEnded()
-        }
-      })
-
-      this.audioContext.onError((err) => {
-        console.error('Audio error:', err)
-        reject(err)
-        if (options.onError) {
-          options.onError(err)
-        }
-      })
-
-      this.currentAudio = this.audioContext
+    this.audioContext.onStop(() => {
+      console.log('Audio stopped')
+      if (options.onEnded) {
+        options.onEnded()
+      }
     })
   }
 
@@ -51,7 +59,7 @@ class AudioService {
       this.audioContext.stop()
       this.audioContext.destroy()
       this.audioContext = null
-      this.currentAudio = null
+      this.currentUrl = ''
     }
   }
 

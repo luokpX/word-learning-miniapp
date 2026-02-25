@@ -81,6 +81,11 @@ Page({
     }
   },
 
+  stopAudio() {
+    audioService.stopAudio()
+    this.setData({ isPlaying: false })
+  },
+
   toggleSpeed() {
     const newSpeed = this.data.playSpeed === 1 ? 0.5 : 1
     this.setData({ playSpeed: newSpeed })
