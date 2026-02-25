@@ -47,7 +47,7 @@ class WordBookService {
     const book = books.find(b => b.id === bookId)
     if (book) {
       const text = wordData.text && wordData.text.trim() ? wordData.text.trim() : ''
-      const audioUrl = wordData.audioUrl || (text ? `https://dict.youdao.com/dictvoice?audio=${encodeURIComponent(text)}&type=2` : '')
+      const audioUrl = wordData.audioUrl || (text ? `https://dict.youdao.com/dictvoice?audio=${encodeURIComponent(text)}&type=1` : '')
       const word = {
         id: 'word_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9),
         text: text,

@@ -1,38 +1,30 @@
 class AudioService {
   constructor() {
     this.bgAudioManager = wx.getBackgroundAudioManager()
-    this.innerAudioContext = null
   }
 
   playWordAudio(url, options = {}) {
     if (!url) {
-      console.log('AudioService: No URL provided')
       return
     }
 
-    console.log('AudioService: Playing URL:', url)
+    this.bgAudioManager.title = '单词发音'
+    this.bgAudioManager.epname = '单词发音'
+    this.bgAudioManager.singer = '单词学习'
+    this.bgAudioManager.src = url
 
-    // Use InnerAudioContext for word pronunciation (better for short audio)
-    if (!this.innerAudioContext) {
-      this.innerAudioContext = wx.createInnerAudioContext()
+    if (options.playbackRate) {
+      this.bgAudioManager.playbackRate = options.playbackRate
     }
 
-    this.innerAudioContext.src = url
-    this.innerAudioContext.playbackRate(options.playbackRate || 1)
-
-    this.innerAudioContext.onPlay(() => {
-      console.log('AudioService: Playing')
-    })
-
-    this.innerAudioContext.onEnded(() => {
-      console.log('AudioService: Ended')
+    this.bgAudioManager.onEnded(() => {
       if (options.onEnded) {
         options.onEnded()
       }
     })
 
-    this.innerAudioContext.onError((err) => {
-      console.error('AudioService: Error', err)
+    this.bgAudioManager.onError((err) => {
+      console.error('Audio error:', err)
       if (options.onError) {
         options.onError(err)
       }
@@ -41,20 +33,14 @@ class AudioService {
       }
     })
 
-    this.innerAudioContext.play()
+    this.bgAudioManager.play()
   }
 
   stopAudio() {
-    if (this.innerAudioContext) {
-      this.innerAudioContext.stop()
-    }
     this.bgAudioManager.stop()
   }
 
   setPlaybackRate(rate) {
-    if (this.innerAudioContext) {
-      this.innerAudioContext.playbackRate(rate)
-    }
     this.bgAudioManager.playbackRate = rate
   }
 }
