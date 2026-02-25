@@ -42,7 +42,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20rpx;
+  padding: 10rpx;
+  min-height: 500rpx;
 }
 
 .flashcard {
@@ -193,8 +194,8 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 20rpx;
-  padding: 30rpx 20rpx 50rpx;
+  gap: 15rpx;
+  padding: 20rpx 20rpx 30rpx;
 }
 
 .action-btn {
