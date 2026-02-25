@@ -15,9 +15,14 @@
           <text class="word-text">{{currentWord.text}}</text>
           <text class="word-phonetic">{{currentWord.phonetic}}</text>
         </view>
-        <view class="audio-btn" catchtap="playAudio" data-url="{{currentWord.audioUrl}}">
-          <text class="audio-icon-emoji">🔊</text>
-          <text class="audio-text">点击发音</text>
+        <view class="audio-controls">
+          <view class="audio-btn {{isPlaying ? 'playing' : ''}}" catchtap="playAudio" data-url="{{currentWord.audioUrl}}">
+            <text class="audio-icon-emoji">{{isPlaying ? '🔊' : '▶️'}}</text>
+            <text class="audio-text">{{isPlaying ? '播放中...' : '播放发音'}}</text>
+          </view>
+          <view class="speed-btn" catchtap="toggleSpeed">
+            <text class="speed-text">{{playSpeed === 1 ? '🐢 慢速' : '🐇 正常'}}</text>
+          </view>
         </view>
         <text class="flip-hint">点击卡片查看释义</text>
       </view>

@@ -15,7 +15,9 @@ Page({
       easy: 0,
       hard: 0,
       wrong: 0
-    }
+    },
+    isPlaying: false,
+    playSpeed: 1
   },
 
   onLoad(options) {
@@ -66,8 +68,27 @@ Page({
   playAudio(e) {
     const url = e.currentTarget.dataset.url
     if (url) {
-      audioService.playWordAudio(url)
+      this.setData({ isPlaying: true })
+      audioService.setPlaybackRate(this.data.playSpeed)
+      audioService.playWordAudio(url, {
+        onEnded: () => {
+          this.setData({ isPlaying: false })
+        },
+        onError: () => {
+          this.setData({ isPlaying: false })
+        }
+      })
     }
+  },
+
+  toggleSpeed() {
+    const newSpeed = this.data.playSpeed === 1 ? 0.5 : 1
+    this.setData({ playSpeed: newSpeed })
+    wx.showToast({
+      title: newSpeed === 0.5 ? '慢速播放' : '正常速度',
+      icon: 'none',
+      duration: 1000
+    })
   },
 
   markEasy() {
