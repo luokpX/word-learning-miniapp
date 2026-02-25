@@ -46,12 +46,13 @@ class WordBookService {
     const books = this.getAllWordBooks()
     const book = books.find(b => b.id === bookId)
     if (book) {
+      const audioUrl = wordData.audioUrl || `https://dict.youdao.com/dictvoice?audio=${encodeURIComponent(wordData.text)}&type=1`
       const word = {
         id: 'word_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9),
         text: wordData.text,
         phonetic: wordData.phonetic || '',
         meaning: wordData.meaning || '',
-        audioUrl: wordData.audioUrl || '',
+        audioUrl: audioUrl,
         examples: wordData.examples || []
       }
       book.addWord(word)

@@ -185,9 +185,15 @@ Page({
   },
 
   playWord(e) {
-    const url = e.currentTarget.dataset.url
+    let url = e.currentTarget.dataset.url
+    const text = e.currentTarget.dataset.text
+    if (!url && text) {
+      url = `https://dict.youdao.com/dictvoice?audio=${encodeURIComponent(text)}&type=1`
+    }
     if (url) {
       audioService.playWordAudio(url)
+    } else {
+      wx.showToast({ title: '无法播放发音', icon: 'none' })
     }
   }
 })

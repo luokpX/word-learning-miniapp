@@ -31,7 +31,7 @@
         <text class="word-meaning">{{item.meaning}}</text>
       </view>
       <view class="word-actions">
-        <text class="play-btn" catchtap="playWord" data-url="{{item.audioUrl}}">🔊</text>
+        <text class="play-btn" catchtap="playWord" data-url="{{item.audioUrl}}" data-text="{{item.text}}">🔊</text>
         <text class="delete-btn" catchtap="deleteWord" data-id="{{item.id}}">✕</text>
       </view>
     </view>
