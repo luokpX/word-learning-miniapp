@@ -60,6 +60,9 @@
     <view class="control-btn prev" bindtap="prevWord" wx:if="{{currentIndex > 0}}">
       <text>上一个</text>
     </view>
+    <view class="control-btn flip-hint-btn" bindtap="flipCard">
+      <text>🔄 翻看释义</text>
+    </view>
     <view class="control-btn next" bindtap="nextWord">
       <text>{{currentIndex === wordList.length - 1 ? '完成学习' : '下一个'}}</text>
     </view>

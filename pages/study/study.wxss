@@ -191,7 +191,9 @@
 
 .action-buttons {
   display: flex;
-  justify-content: space-around;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20rpx;
   padding: 30rpx 20rpx 50rpx;
 }
 
@@ -199,9 +201,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 25rpx 40rpx;
+  padding: 20rpx 30rpx;
   border-radius: 20rpx;
-  min-width: 180rpx;
+  min-width: 140rpx;
+  flex: 1;
+  max-width: 160rpx;
 }
 
 .action-btn.wrong {
