@@ -1,0 +1,75 @@
+<view class="container">
+  <view class="profile-header">
+    <view class="avatar-section">
+      <image class="avatar" src="{{userInfo.avatarUrl || '/assets/icons/default-avatar.png'}}" mode="aspectFill"></image>
+      <text class="username">{{userInfo.nickName || '小学生'}}</text>
+      <text class="user-level">Lv.{{level}}</text>
+    </view>
+  </view>
+
+  <view class="stats-overview card">
+    <view class="stat-row">
+      <view class="stat-box">
+        <text class="stat-value">{{studyStats.totalDays}}</text>
+        <text class="stat-label">学习天数</text>
+      </view>
+      <view class="stat-box">
+        <text class="stat-value">{{studyStats.masteredCount}}</text>
+        <text class="stat-label">掌握单词</text>
+      </view>
+      <view class="stat-box">
+        <text class="stat-value">{{studyStats.currentStreak}}</text>
+        <text class="stat-label">连续天数</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="achievements card">
+    <view class="section-title">我的成就</view>
+    <view class="badge-grid">
+      <view class="badge-item {{achievement.unlocked ? '' : 'locked'}}" wx:for="{{achievements}}" wx:key="id">
+        <text class="badge-icon">{{item.icon}}</text>
+        <text class="badge-name">{{item.name}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="menu-list card">
+    <view class="menu-item" bindtap="viewProgress">
+      <view class="menu-left">
+        <text class="menu-icon">📊</text>
+        <text class="menu-text">学习进度</text>
+      </view>
+      <text class="menu-arrow">></text>
+    </view>
+    <view class="menu-item" bindtap="viewWrongWords">
+      <view class="menu-left">
+        <text class="menu-icon">📝</text>
+        <text class="menu-text">错题本</text>
+      </view>
+      <text class="menu-arrow">></text>
+    </view>
+    <view class="menu-item" bindtap="viewCustomBooks">
+      <view class="menu-left">
+        <text class="menu-icon">📚</text>
+        <text class="menu-text">我的单词本</text>
+      </view>
+      <text class="menu-arrow">></text>
+    </view>
+    <view class="menu-item" bindtap="settings">
+      <view class="menu-left">
+        <text class="menu-icon">⚙️</text>
+        <text class="menu-text">设置</text>
+      </view>
+      <text class="menu-arrow">></text>
+    </view>
+  </view>
+
+  <view class="parent-bind card" wx:if="{{!isParentBound}}">
+    <view class="bind-content">
+      <text class="bind-title">绑定家长</text>
+      <text class="bind-desc">绑定后，家长可以查看你的学习进度</text>
+      <button class="btn btn-primary bind-btn" bindtap="bindParent">立即绑定</button>
+    </view>
+  </view>
+</view>

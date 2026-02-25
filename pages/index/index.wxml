@@ -1,0 +1,72 @@
+<view class="container">
+  <view class="header">
+    <view class="greeting">
+      <text class="greeting-text">你好！</text>
+      <text class="greeting-subtitle">今天想学几个单词？</text>
+    </view>
+  </view>
+
+  <view class="stats-card card">
+    <view class="stats-row">
+      <view class="stat-item">
+        <text class="stat-number">{{studyProgress.todayStudied}}</text>
+        <text class="stat-label">今日已学</text>
+      </view>
+      <view class="stat-divider"></view>
+      <view class="stat-item">
+        <text class="stat-number">{{studyProgress.masteredWords}}</text>
+        <text class="stat-label">已掌握</text>
+      </view>
+      <view class="stat-divider"></view>
+      <view class="stat-item">
+        <text class="stat-number">{{studyProgress.learningWords}}</text>
+        <text class="stat-label">学习中</text>
+      </view>
+    </view>
+    <view class="progress-section">
+      <text class="progress-label">今日目标：{{studyProgress.todayStudied}}/{{studyProgress.dailyGoal}}</text>
+      <view class="progress-bar">
+        <view class="progress-fill" style="width: {{progressPercent}}%"></view>
+      </view>
+    </view>
+  </view>
+
+  <view class="quick-actions">
+    <view class="action-card" bindtap="startQuickStudy">
+      <view class="action-icon">📚</view>
+      <text class="action-title">快速学习</text>
+      <text class="action-desc">学习20个新单词</text>
+    </view>
+
+    <view class="action-card" bindtap="startReview">
+      <view class="action-icon">🔄</view>
+      <text class="action-title">复习单词</text>
+      <text class="action-desc">巩固已学内容</text>
+    </view>
+
+    <view class="action-card" bindtap="startTest">
+      <view class="action-icon">📝</view>
+      <text class="action-title">单词测试</text>
+      <text class="action-desc">检验学习成果</text>
+    </view>
+  </view>
+
+  <view class="recent-words card">
+    <view class="section-header">
+      <text class="section-title">最近学习</text>
+      <text class="section-more" bindtap="viewAllWords">查看全部 ></text>
+    </view>
+    <view class="word-list">
+      <view class="word-item" wx:for="{{recentWords}}" wx:key="id" bindtap="playWord" data-word="{{item}}">
+        <view class="word-content">
+          <text class="word-text">{{item.text}}</text>
+          <text class="word-phonetic">{{item.phonetic}}</text>
+        </view>
+        <view class="word-actions">
+          <text class="word-meaning">{{item.meaning}}</text>
+          <text class="play-icon-text" catchtap="playWord" data-word="{{item}}">🔊</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

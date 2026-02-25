@@ -1,0 +1,55 @@
+<view class="container">
+  <view class="header">
+    <text class="header-title">单词本</text>
+    <text class="header-subtitle">选择你要学习的单元</text>
+  </view>
+
+  <view class="filter-tabs">
+    <view 
+      class="tab {{currentTab === 'all' ? 'active' : ''}}" 
+      bindtap="switchTab" 
+      data-tab="all">全部</view>
+    <view 
+      class="tab {{currentTab === 'fruit' ? 'active' : ''}}" 
+      bindtap="switchTab" 
+      data-tab="fruit">水果</view>
+    <view 
+      class="tab {{currentTab === 'animal' ? 'active' : ''}}" 
+      bindtap="switchTab" 
+      data-tab="animal">动物</view>
+    <view 
+      class="tab {{currentTab === 'school' ? 'active' : ''}}" 
+      bindtap="switchTab" 
+      data-tab="school">学校</view>
+  </view>
+
+  <view class="word-count">
+    <text>共 {{filteredWords.length}} 个单词</text>
+  </view>
+
+  <view class="word-grid">
+    <view 
+      class="word-card" 
+      wx:for="{{filteredWords}}" 
+      wx:key="id"
+      bindtap="showWordDetail" 
+      data-word="{{item}}">
+      <view class="word-card-header">
+        <text class="word-card-text">{{item.text}}</text>
+        <text 
+          class="play-icon-text" 
+          catchtap="playWordAudio" 
+          data-url="{{item.audioUrl}}">🔊</text>
+      </view>
+      <text class="word-card-phonetic">{{item.phonetic}}</text>
+      <text class="word-card-meaning">{{item.meaning}}</text>
+      <view class="word-card-status" wx:if="{{item.mastered}}">
+        <text class="status-badge mastered">已掌握</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="add-word-btn" bindtap="addCustomWord">
+    <text class="add-btn-text">+ 添加单词</text>
+  </view>
+</view>

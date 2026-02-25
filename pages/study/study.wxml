@@ -1,0 +1,84 @@
+<view class="container">
+  <view class="study-header">
+    <view class="progress-info">
+      <text class="progress-text">{{currentIndex + 1}} / {{wordList.length}}</text>
+      <view class="progress-bar">
+        <view class="progress-fill" style="width: {{progressPercent}}%"></view>
+      </view>
+    </view>
+  </view>
+
+  <view class="flashcard-container">
+    <view class="flashcard {{isFlipped ? 'flipped' : ''}}" bindtap="flipCard">
+      <view class="card-front">
+        <view class="word-main">
+          <text class="word-text">{{currentWord.text}}</text>
+          <text class="word-phonetic">{{currentWord.phonetic}}</text>
+        </view>
+        <view class="audio-btn" catchtap="playAudio" data-url="{{currentWord.audioUrl}}">
+          <text class="audio-icon-emoji">🔊</text>
+          <text class="audio-text">点击发音</text>
+        </view>
+        <text class="flip-hint">点击卡片查看释义</text>
+      </view>
+      <view class="card-back">
+        <text class="meaning-text">{{currentWord.meaning}}</text>
+        <view class="examples" wx:if="{{currentWord.examples && currentWord.examples.length}}">
+          <text class="example-label">例句：</text>
+          <text class="example-text">{{currentWord.examples[0]}}</text>
+        </view>
+        <text class="flip-hint">点击卡片返回</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="action-buttons" wx:if="{{isFlipped}}">
+    <view class="action-btn wrong" bindtap="markWrong">
+      <text class="btn-icon">✗</text>
+      <text class="btn-text">不认识</text>
+    </view>
+    <view class="action-btn hard" bindtap="markHard">
+      <text class="btn-icon">😐</text>
+      <text class="btn-text">有点难</text>
+    </view>
+    <view class="action-btn easy" bindtap="markEasy">
+      <text class="btn-icon">✓</text>
+      <text class="btn-text">认识了</text>
+    </view>
+  </view>
+
+  <view class="study-controls" wx:if="{{!isFlipped}}">
+    <view class="control-btn prev" bindtap="prevWord" wx:if="{{currentIndex > 0}}">
+      <text>上一个</text>
+    </view>
+    <view class="control-btn next" bindtap="nextWord">
+      <text>{{currentIndex === wordList.length - 1 ? '完成学习' : '下一个'}}</text>
+    </view>
+  </view>
+
+  <view class="session-complete" wx:if="{{sessionComplete}}">
+    <view class="complete-content">
+      <text class="complete-icon">🎉</text>
+      <text class="complete-title">太棒了！</text>
+      <text class="complete-subtitle">本次学习完成</text>
+      <view class="result-stats">
+        <view class="stat-item">
+          <text class="stat-num">{{stats.easy}}</text>
+          <text class="stat-label">认识</text>
+        </view>
+        <view class="stat-item">
+          <text class="stat-num">{{stats.hard}}</text>
+          <text class="stat-label">复习</text>
+        </view>
+        <view class="stat-item">
+          <text class="stat-num">{{stats.wrong}}</text>
+          <text class="stat-label">不会</text>
+        </view>
+      </view>
+      <view class="complete-actions">
+        <button class="btn btn-secondary" bindtap="restartStudy">再学一遍</button>
+        <button class="btn btn-primary" bindtap="goHome">返回首页</button>
+      </view>
+    </view>
+  </view>
+</view>

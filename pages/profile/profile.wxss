@@ -1,0 +1,179 @@
+.container {
+  min-height: 100vh;
+  background-color: #F5F5F5;
+  padding-bottom: 40rpx;
+}
+
+.profile-header {
+  background: linear-gradient(135deg, #4A90E2 0%, #357ABD 100%);
+  padding: 60rpx 40rpx 100rpx;
+  border-radius: 0 0 40rpx 40rpx;
+}
+
+.avatar-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: -60rpx;
+}
+
+.avatar {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 50%;
+  border: 6rpx solid #ffffff;
+  background-color: #E8E8E8;
+  margin-bottom: 20rpx;
+}
+
+.username {
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 10rpx;
+}
+
+.user-level {
+  background-color: rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  padding: 8rpx 20rpx;
+  border-radius: 20rpx;
+  font-size: 24rpx;
+}
+
+.stats-overview {
+  margin-top: -40rpx;
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-around;
+}
+
+.stat-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20rpx;
+}
+
+.stat-value {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #4A90E2;
+  margin-bottom: 8rpx;
+}
+
+.stat-label {
+  font-size: 24rpx;
+  color: #999999;
+}
+
+.achievements {
+  margin: 20rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 30rpx;
+}
+
+.badge-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20rpx;
+}
+
+.badge-item {
+  width: calc(25% - 15rpx);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20rpx 10rpx;
+  background-color: #F9F9F9;
+  border-radius: 16rpx;
+}
+
+.badge-item.locked {
+  opacity: 0.4;
+}
+
+.badge-icon {
+  font-size: 48rpx;
+  margin-bottom: 10rpx;
+}
+
+.badge-name {
+  font-size: 22rpx;
+  color: #666666;
+  text-align: center;
+}
+
+.menu-list {
+  margin: 20rpx;
+}
+
+.menu-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30rpx 0;
+  border-bottom: 1rpx solid #F0F0F0;
+}
+
+.menu-item:last-child {
+  border-bottom: none;
+}
+
+.menu-left {
+  display: flex;
+  align-items: center;
+}
+
+.menu-icon {
+  font-size: 40rpx;
+  margin-right: 20rpx;
+}
+
+.menu-text {
+  font-size: 30rpx;
+  color: #333333;
+}
+
+.menu-arrow {
+  color: #CCCCCC;
+  font-size: 30rpx;
+}
+
+.parent-bind {
+  margin: 20rpx;
+  background: linear-gradient(135deg, #FF9A56 0%, #FF6B6B 100%);
+}
+
+.bind-content {
+  text-align: center;
+  padding: 20rpx;
+}
+
+.bind-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #ffffff;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.bind-desc {
+  font-size: 26rpx;
+  color: rgba(255, 255, 255, 0.8);
+  display: block;
+  margin-bottom: 20rpx;
+}
+
+.bind-btn {
+  width: 50%;
+  background-color: #ffffff;
+  color: #FF6B6B;
+}
