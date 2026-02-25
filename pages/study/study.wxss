@@ -6,13 +6,13 @@
 }
 
 .study-header {
-  padding: 20rpx;
+  padding: 40rpx;
 }
 
 .progress-info {
   background-color: rgba(255, 255, 255, 0.9);
-  border-radius: 16rpx;
-  padding: 20rpx;
+  border-radius: 20rpx;
+  padding: 30rpx;
 }
 
 .progress-text {
@@ -43,12 +43,12 @@
   align-items: center;
   justify-content: center;
   padding: 10rpx;
-  min-height: 0;
+  min-height: 500rpx;
 }
 
 .flashcard {
   width: 100%;
-  height: 380rpx;
+  height: 450rpx;
   perspective: 1000rpx;
   cursor: pointer;
 }
@@ -195,7 +195,7 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 10rpx;
-  padding: 10rpx;
+  padding: 15rpx;
 }
 
 .action-btn {
