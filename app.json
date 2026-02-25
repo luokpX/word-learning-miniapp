@@ -20,27 +20,19 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "首页",
-        "iconPath": "assets/icons/home.png",
-        "selectedIconPath": "assets/icons/home-active.png"
+        "text": "首页"
       },
       {
         "pagePath": "pages/wordbook/wordbook",
-        "text": "单词本",
-        "iconPath": "assets/icons/book.png",
-        "selectedIconPath": "assets/icons/book-active.png"
+        "text": "单词本"
       },
       {
         "pagePath": "pages/study/study",
-        "text": "学习",
-        "iconPath": "assets/icons/study.png",
-        "selectedIconPath": "assets/icons/study-active.png"
+        "text": "学习"
       },
       {
         "pagePath": "pages/profile/profile",
-        "text": "我的",
-        "iconPath": "assets/icons/profile.png",
-        "selectedIconPath": "assets/icons/profile-active.png"
+        "text": "我的"
       }
     ]
   },
