@@ -216,6 +216,14 @@
   background-color: #F6FFED;
 }
 
+.action-btn.skip {
+  background-color: #E6F4FF;
+}
+
+.action-btn.skip .btn-text {
+  color: #4A90E2;
+}
+
 .btn-icon {
   font-size: 48rpx;
   margin-bottom: 10rpx;
