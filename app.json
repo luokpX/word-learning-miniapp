@@ -4,6 +4,7 @@
     "pages/index/index",
     "pages/wordbook/wordbook",
     "pages/wordbook-detail/wordbook-detail",
+    "pages/study-select/study-select",
     "pages/study/study",
     "pages/profile/profile"
   ],
@@ -30,7 +31,7 @@
         "text": "单词本"
       },
       {
-        "pagePath": "pages/study/study",
+        "pagePath": "pages/study-select/study-select",
         "text": "学习"
       },
       {

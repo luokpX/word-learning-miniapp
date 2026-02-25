@@ -1,10 +1,12 @@
 const wordService = require('../../services/word')
+const wordBookService = require('../../services/wordBook')
 const audioService = require('../../services/audio')
 const StorageService = require('../../utils/storage')
 
 Page({
   data: {
     mode: 'learn',
+    bookId: '',
     wordList: [],
     currentIndex: 0,
     currentWord: {},
@@ -22,16 +24,12 @@ Page({
 
   onLoad(options) {
     const mode = options.mode || 'learn'
-    this.setData({ mode })
+    const bookId = options.bookId || ''
+    this.setData({ mode, bookId })
     this.loadWordList()
   },
 
   onShow() {
-    if (typeof this.getTabBar === 'function' && this.getTabBar()) {
-      this.getTabBar().setData({
-        currentIndex: 2
-      })
-    }
   },
 
   onUnload() {
@@ -41,7 +39,13 @@ Page({
   loadWordList() {
     let words = []
     
-    if (this.data.mode === 'learn') {
+    if (this.data.bookId) {
+      const book = wordBookService.getWordBookById(this.data.bookId)
+      if (book) {
+        const bookData = book.toJSON ? book.toJSON() : book
+        words = bookData.words || []
+      }
+    } else if (this.data.mode === 'learn') {
       words = wordService.getRandomWords(10)
     } else if (this.data.mode === 'review') {
       const recent = StorageService.getRecentWords(20)
@@ -56,6 +60,14 @@ Page({
         currentWord: words[0],
         progressPercent: 0
       })
+    } else {
+      wx.showToast({
+        title: '单词本为空',
+        icon: 'none'
+      })
+      setTimeout(() => {
+        wx.navigateBack()
+      }, 1500)
     }
   },
 
