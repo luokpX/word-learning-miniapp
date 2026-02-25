@@ -46,10 +46,11 @@ class WordBookService {
     const books = this.getAllWordBooks()
     const book = books.find(b => b.id === bookId)
     if (book) {
-      const audioUrl = wordData.audioUrl || `https://dict.youdao.com/dictvoice?audio=${encodeURIComponent(wordData.text)}&type=1`
+      const text = wordData.text && wordData.text.trim() ? wordData.text.trim() : ''
+      const audioUrl = wordData.audioUrl || (text ? `https://dict.youdao.com/dictvoice?audio=${encodeURIComponent(text)}&type=2` : '')
       const word = {
         id: 'word_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9),
-        text: wordData.text,
+        text: text,
         phonetic: wordData.phonetic || '',
         meaning: wordData.meaning || '',
         audioUrl: audioUrl,
@@ -80,8 +81,8 @@ class WordBookService {
       if (parts.length >= 2) {
         const word = this.addWordToBook(bookId, {
           text: parts[0],
-          meaning: parts[1] || '',
-          phonetic: parts[2] || ''
+          phonetic: parts[1] || '',
+          meaning: parts[2] || ''
         })
         if (word) {
           addedWords.push(word)

@@ -20,7 +20,7 @@
   <view 
     class="tab-item {{currentIndex === 2 ? 'active' : ''}}" 
     data-index="2" 
-    data-path="pages/study/study"
+    data-path="pages/study-select/study-select"
     bindtap="switchTab">
     <text class="tab-icon">📚</text>
     <text class="tab-text">学习</text>
