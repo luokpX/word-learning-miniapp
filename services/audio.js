@@ -10,14 +10,10 @@ class AudioService {
       return Promise.reject(new Error('Audio URL is empty'))
     }
 
-    const self = this
-
-    if (this.audioContext && this.currentUrl === url) {
-      this.audioContext.stop()
-    }
-
     if (this.audioContext) {
+      this.audioContext.stop()
       this.audioContext.destroy()
+      this.audioContext = null
     }
 
     this.audioContext = wx.createInnerAudioContext()
@@ -27,9 +23,6 @@ class AudioService {
 
     this.audioContext.onPlay(() => {
       console.log('Audio started playing')
-      if (options.onPlay) {
-        options.onPlay()
-      }
     })
 
     this.audioContext.onEnded(() => {
@@ -46,17 +39,20 @@ class AudioService {
       }
     })
 
-    this.audioContext.onStop(() => {
-      console.log('Audio stopped')
+    setTimeout(() => {
       if (options.onEnded) {
         options.onEnded()
       }
-    })
+    }, 3000)
   }
 
   stopAudio() {
     if (this.audioContext) {
-      this.audioContext.stop()
+      try {
+        this.audioContext.stop()
+      } catch (e) {
+        console.log('Stop error:', e)
+      }
       this.audioContext.destroy()
       this.audioContext = null
       this.currentUrl = ''
