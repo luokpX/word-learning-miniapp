@@ -82,6 +82,7 @@ Page({
     if (url) {
       this.setData({ isPlaying: true })
       audioService.playWordAudio(url, {
+        playbackRate: this.data.playSpeed,
         onEnded: () => {
           this.setData({ isPlaying: false })
         },

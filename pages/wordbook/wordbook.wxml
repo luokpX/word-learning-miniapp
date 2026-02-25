@@ -4,6 +4,10 @@
     <text class="header-subtitle">创建和管理你的单词本</text>
   </view>
 
+  <view class="debug-btn" bindtap="clearAllData" wx:if="{{wordBooks.length > 0}}">
+    <text class="debug-text">清除所有数据（重新导入）</text>
+  </view>
+
   <view class="book-list">
     <view 
       class="book-item" 

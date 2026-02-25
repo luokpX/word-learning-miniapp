@@ -70,5 +70,20 @@ Page({
     wx.navigateTo({
       url: `/pages/wordbook-detail/wordbook-detail?id=${id}`
     })
+  },
+
+  clearAllData() {
+    wx.showModal({
+      title: '提示',
+      content: '确定要清除所有单词本数据吗？',
+      success: (res) => {
+        if (res.confirm) {
+          const StorageService = require('../../utils/storage')
+          StorageService.remove('wordBooks')
+          this.loadWordBooks()
+          wx.showToast({ title: '已清除' })
+        }
+      }
+    })
   }
 })
