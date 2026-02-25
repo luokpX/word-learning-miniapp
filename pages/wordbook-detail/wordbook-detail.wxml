@@ -1,0 +1,87 @@
+<view class="container">
+  <view class="header">
+    <text class="book-name">{{book.name}}</text>
+    <text class="book-count">共 {{book.words.length}} 个单词</text>
+  </view>
+
+  <view class="toolbar">
+    <view class="tool-btn" bindtap="addWord">
+      <text class="tool-icon">➕</text>
+      <text class="tool-text">添加单词</text>
+    </view>
+    <view class="tool-btn" bindtap="importWords">
+      <text class="tool-icon">📥</text>
+      <text class="tool-text">导入单词</text>
+    </view>
+    <view class="tool-btn" bindtap="editBook">
+      <text class="tool-icon">✏️</text>
+      <text class="tool-text">编辑</text>
+    </view>
+    <view class="tool-btn" bindtap="deleteBook">
+      <text class="tool-icon">🗑️</text>
+      <text class="tool-text">删除</text>
+    </view>
+  </view>
+
+  <view class="word-list">
+    <view class="word-item" wx:for="{{book.words}}" wx:key="id">
+      <view class="word-info" bindtap="playWord" data-url="{{item.audioUrl}}">
+        <text class="word-text">{{item.text}}</text>
+        <text class="word-phonetic">{{item.phonetic}}</text>
+        <text class="word-meaning">{{item.meaning}}</text>
+      </view>
+      <view class="word-actions">
+        <text class="play-btn" catchtap="playWord" data-url="{{item.audioUrl}}">🔊</text>
+        <text class="delete-btn" catchtap="deleteWord" data-id="{{item.id}}">✕</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="empty-tip" wx:if="{{book.words.length === 0}}">
+    <text class="empty-icon">📚</text>
+    <text class="empty-text">单词本还没有单词</text>
+    <text class="empty-hint">点击上方"添加单词"或"导入单词"来添加</text>
+  </view>
+
+  <view class="add-modal" wx:if="{{showAddModal}}">
+    <view class="modal-mask" bindtap="closeModal"></view>
+    <view class="modal-content">
+      <text class="modal-title">{{isEdit ? '编辑单词' : '添加单词'}}</text>
+      <view class="form-item">
+        <text class="form-label">单词</text>
+        <input class="form-input" placeholder="请输入单词" value="{{formData.text}}" bindinput="onInput" data-field="text"/>
+      </view>
+      <view class="form-item">
+        <text class="form-label">音标</text>
+        <input class="form-input" placeholder="请输入音标" value="{{formData.phonetic}}" bindinput="onInput" data-field="phonetic"/>
+      </view>
+      <view class="form-item">
+        <text class="form-label">释义</text>
+        <input class="form-input" placeholder="请输入中文释义" value="{{formData.meaning}}" bindinput="onInput" data-field="meaning"/>
+      </view>
+      <view class="modal-buttons">
+        <button class="btn-cancel" bindtap="closeModal">取消</button>
+        <button class="btn-confirm" bindtap="confirmAddWord">确定</button>
+      </view>
+    </view>
+  </view>
+
+  <view class="add-modal" wx:if="{{showImportModal}}">
+    <view class="modal-mask" bindtap="closeImportModal"></view>
+    <view class="modal-content">
+      <text class="modal-title">导入单词</text>
+      <view class="import-tips">
+        <text class="tips-title">导入格式说明：</text>
+        <text class="tips-text">每行一个单词，格式：单词,音标,释义</text>
+        <text class="tips-text">例如：apple,/ˈæpl/,苹果</text>
+      </view>
+      <view class="form-item">
+        <textarea class="import-textarea" placeholder="请粘贴单词列表" value="{{importText}}" bindinput="onImportInput"></textarea>
+      </view>
+      <view class="modal-buttons">
+        <button class="btn-cancel" bindtap="closeImportModal">取消</button>
+        <button class="btn-confirm" bindtap="confirmImport">导入</button>
+      </view>
+    </view>
+  </view>
+</view>

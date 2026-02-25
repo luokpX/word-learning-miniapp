@@ -3,6 +3,7 @@
   "pages": [
     "pages/index/index",
     "pages/wordbook/wordbook",
+    "pages/wordbook-detail/wordbook-detail",
     "pages/study/study",
     "pages/profile/profile"
   ],

@@ -1,21 +1,20 @@
-const wordService = require('../../services/word')
-const audioService = require('../../services/audio')
-const StorageService = require('../../utils/storage')
+const wordBookService = require('../../services/wordBook')
 
 Page({
   data: {
-    currentTab: 'all',
-    allWords: [],
-    filteredWords: [],
-    masteredWords: []
+    wordBooks: [],
+    showModal: false,
+    newBook: {
+      name: '',
+      description: ''
+    }
   },
 
   onLoad() {
-    this.loadWords()
   },
 
   onShow() {
-    this.loadMasteredStatus()
+    this.loadWordBooks()
     if (typeof this.getTabBar === 'function' && this.getTabBar()) {
       this.getTabBar().setData({
         currentIndex: 1
@@ -23,69 +22,53 @@ Page({
     }
   },
 
-  loadWords() {
-    const words = wordService.getAllWords()
+  loadWordBooks() {
+    const books = wordBookService.getAllWordBooks()
     this.setData({
-      allWords: words,
-      filteredWords: words
+      wordBooks: books.map(b => b.toJSON ? b.toJSON() : b)
     })
   },
 
-  loadMasteredStatus() {
-    const mastered = StorageService.get('masteredWords', [])
-    const updatedWords = this.data.allWords.map(w => ({
-      ...w,
-      mastered: mastered.includes(w.id)
-    }))
-    
+  showCreateModal() {
     this.setData({
-      allWords: updatedWords,
-      filteredWords: this.data.currentTab === 'all' 
-        ? updatedWords 
-        : updatedWords.filter(w => w.category === this.data.currentTab)
+      showModal: true,
+      newBook: { name: '', description: '' }
     })
   },
 
-  switchTab(e) {
-    const tab = e.currentTarget.dataset.tab
-    const filtered = tab === 'all' 
-      ? this.data.allWords 
-      : this.data.allWords.filter(w => w.category === tab)
-    
+  closeModal() {
+    this.setData({ showModal: false })
+  },
+
+  onNameInput(e) {
     this.setData({
-      currentTab: tab,
-      filteredWords: filtered
+      'newBook.name': e.detail.value
     })
   },
 
-  showWordDetail(e) {
-    const word = e.currentTarget.dataset.word
-    StorageService.addRecentWord(word)
-    
-    wx.showModal({
-      title: word.text,
-      content: `${word.phonetic}\n\n${word.meaning}\n\n例句：${word.examples[0] || '暂无例句'}`,
-      showCancel: false,
-      confirmText: '关闭',
-      success: () => {
-        if (word.audioUrl) {
-          this.playWordAudio({ currentTarget: { dataset: { url: word.audioUrl } } })
-        }
-      }
+  onDescInput(e) {
+    this.setData({
+      'newBook.description': e.detail.value
     })
   },
 
-  playWordAudio(e) {
-    const url = e.currentTarget.dataset.url
-    if (url) {
-      audioService.playWordAudio(url)
+  createBook() {
+    const { name, description } = this.data.newBook
+    if (!name) {
+      wx.showToast({ title: '请输入名称', icon: 'none' })
+      return
     }
+
+    wordBookService.createWordBook(name, description)
+    this.loadWordBooks()
+    this.setData({ showModal: false })
+    wx.showToast({ title: '创建成功' })
   },
 
-  addCustomWord() {
-    wx.showToast({
-      title: '功能开发中',
-      icon: 'none'
+  goToBookDetail(e) {
+    const id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: `/pages/wordbook-detail/wordbook-detail?id=${id}`
     })
   }
 })
