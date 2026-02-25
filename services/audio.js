@@ -2,19 +2,29 @@ class AudioService {
   constructor() {
     this.audioContext = null
     this.currentUrl = ''
+    this.onEndedCallback = null
   }
 
   playWordAudio(url, options = {}) {
     if (!url) {
       console.warn('Audio URL is empty')
-      return Promise.reject(new Error('Audio URL is empty'))
+      return
     }
 
-    if (this.audioContext) {
-      this.audioContext.stop()
-      this.audioContext.destroy()
-      this.audioContext = null
-    }
+    const self = this
+
+    wx.stopBackgroundAudio({
+      success: function() {
+        self.play(url, options)
+      },
+      fail: function() {
+        self.play(url, options)
+      }
+    })
+  }
+
+  play(url, options = {}) {
+    const self = this
 
     this.audioContext = wx.createInnerAudioContext()
     this.audioContext.src = url
@@ -27,6 +37,8 @@ class AudioService {
 
     this.audioContext.onEnded(() => {
       console.log('Audio ended')
+      self.audioContext.destroy()
+      self.audioContext = null
       if (options.onEnded) {
         options.onEnded()
       }
@@ -34,25 +46,20 @@ class AudioService {
 
     this.audioContext.onError((err) => {
       console.error('Audio error:', err)
+      self.audioContext.destroy()
+      self.audioContext = null
       if (options.onError) {
         options.onError(err)
       }
-    })
-
-    setTimeout(() => {
       if (options.onEnded) {
         options.onEnded()
       }
-    }, 3000)
+    })
   }
 
   stopAudio() {
     if (this.audioContext) {
-      try {
-        this.audioContext.stop()
-      } catch (e) {
-        console.log('Stop error:', e)
-      }
+      this.audioContext.stop()
       this.audioContext.destroy()
       this.audioContext = null
       this.currentUrl = ''
