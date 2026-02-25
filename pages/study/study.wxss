@@ -6,13 +6,15 @@
 }
 
 .study-header {
-  padding: 40rpx;
+  padding: 20rpx;
+  padding-top: 30rpx;
 }
 
 .progress-info {
   background-color: rgba(255, 255, 255, 0.9);
-  border-radius: 20rpx;
-  padding: 30rpx;
+  border-radius: 16rpx;
+  padding: 20rpx;
+  margin: 0 20rpx;
 }
 
 .progress-text {
@@ -42,13 +44,13 @@
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  padding: 15rpx;
-  padding-top: 30rpx;
+  padding: 20rpx;
+  padding-top: 25rpx;
   min-height: 500rpx;
 }
 
 .flashcard {
-  width: 100%;
+  width: calc(100% - 40rpx);
   height: 450rpx;
   perspective: 1000rpx;
   cursor: pointer;
@@ -69,13 +71,13 @@
   height: 100%;
   backface-visibility: hidden;
   background-color: #ffffff;
-  border-radius: 30rpx;
-  box-shadow: 0 10rpx 40rpx rgba(0, 0, 0, 0.15);
+  border-radius: 16rpx;
+  box-shadow: 0 6rpx 20rpx rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 40rpx;
+  padding: 30rpx;
   box-sizing: border-box;
   transition: transform 0.6s;
 }
@@ -196,7 +198,7 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 10rpx;
-  padding: 15rpx;
+  padding: 10rpx 20rpx;
 }
 
 .action-btn {
