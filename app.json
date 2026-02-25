@@ -1,4 +1,5 @@
 {
+  "requiredBackgroundModes": ["audio"],
   "pages": [
     "pages/index/index",
     "pages/wordbook/wordbook",

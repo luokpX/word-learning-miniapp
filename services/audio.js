@@ -1,6 +1,6 @@
 class AudioService {
   constructor() {
-    this.audioContext = null
+    this.bgAudioManager = wx.getBackgroundAudioManager()
   }
 
   playWordAudio(url, options = {}) {
@@ -8,27 +8,21 @@ class AudioService {
       return
     }
 
-    if (this.audioContext) {
-      this.audioContext.stop()
-      this.audioContext = null
-    }
+    const self = this
+    this.bgAudioManager.title = '单词发音'
+    this.bgAudioManager.epname = '单词发音'
+    this.bgAudioManager.singer = '单词学习'
+    this.bgAudioManager.src = url
+    this.bgAudioManager.play()
 
-    const ctx = wx.createInnerAudioContext()
-    ctx.src = url
-    ctx.autoplay = true
-
-    ctx.onPlay(() => {
-    })
-
-    ctx.onEnded(() => {
-      ctx.destroy()
+    this.bgAudioManager.onEnded(function() {
       if (options.onEnded) {
         options.onEnded()
       }
     })
 
-    ctx.onError((err) => {
-      ctx.destroy()
+    this.bgAudioManager.onError(function(err) {
+      console.error('Audio error:', err)
       if (options.onError) {
         options.onError(err)
       }
@@ -37,18 +31,19 @@ class AudioService {
       }
     })
 
-    this.audioContext = ctx
+    setTimeout(function() {
+      if (options.onEnded) {
+        options.onEnded()
+      }
+    }, 3000)
   }
 
   stopAudio() {
-    if (this.audioContext) {
-      this.audioContext.stop()
-      this.audioContext.destroy()
-      this.audioContext = null
-    }
+    this.bgAudioManager.stop()
   }
 
   setPlaybackRate(rate) {
+    this.bgAudioManager.playbackRate = rate
   }
 }
 
