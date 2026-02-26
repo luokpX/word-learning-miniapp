@@ -25,7 +25,7 @@ Page({
     })
   },
 
-  startQuickPractice() {
+  startHanYingPractice() {
     const allBooks = wordBookService.getAllWordBooks()
     let allWords = []
     allBooks.forEach(book => {
