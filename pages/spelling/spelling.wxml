@@ -8,7 +8,12 @@
 
   <view class="word-card" wx:if="{{!sessionComplete}}">
     <view class="word-meaning">{{currentWord.meaning}}</view>
-    <view class="word-phonetic" wx:if="{{currentWord.phonetic}}">{{currentWord.phonetic}}</view>
+    <view class="word-phonetic-row" wx:if="{{currentWord.phonetic || currentWord.audioUrl}}">
+      <text class="word-phonetic" wx:if="{{currentWord.phonetic}}">{{currentWord.phonetic}}</text>
+      <view class="audio-btn" bindtap="playAudio" data-url="{{currentWord.audioUrl}}">
+        <text class="audio-icon">{{isPlaying ? '🔊' : '🔈'}}</text>
+      </view>
+    </view>
     
     <input 
       class="spell-input" 

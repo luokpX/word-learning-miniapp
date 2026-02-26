@@ -1,4 +1,5 @@
 const wordBookService = require('../../services/wordBook')
+const audioService = require('../../services/audio')
 
 Page({
   data: {
@@ -8,6 +9,7 @@ Page({
     userInput: '',
     showResult: false,
     isCorrect: false,
+    isPlaying: false,
     progressPercent: 0,
     sessionComplete: false,
     stats: {
@@ -48,10 +50,29 @@ Page({
     }
   },
 
+  onUnload() {
+    audioService.stopAudio()
+  },
+
   onInput(e) {
     this.setData({
       userInput: e.detail.value
     })
+  },
+
+  playAudio(e) {
+    const url = e.currentTarget.dataset.url
+    if (url) {
+      this.setData({ isPlaying: true })
+      audioService.playWordAudio(url, {
+        onEnded: () => {
+          this.setData({ isPlaying: false })
+        },
+        onError: () => {
+          this.setData({ isPlaying: false })
+        }
+      })
+    }
   },
 
   checkAnswer() {
