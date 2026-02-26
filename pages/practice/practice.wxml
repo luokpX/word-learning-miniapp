@@ -25,6 +25,12 @@
   </view>
 
   <view class="section-title">我的单词本</view>
+  <view class="toggle-row">
+    <text class="toggle-label">练习模式：</text>
+    <view class="toggle-switch {{practiceMode === 'yinghan' ? 'active' : ''}}" bindtap="togglePracticeMode">
+      <text class="toggle-text">{{practiceMode === 'yinghan' ? '英汉练习' : '汉英练习'}}</text>
+    </view>
+  </view>
   <view class="book-list">
     <view 
       class="book-item" 

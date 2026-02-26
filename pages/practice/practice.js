@@ -2,7 +2,8 @@ const wordBookService = require('../../services/wordBook')
 
 Page({
   data: {
-    wordBooks: []
+    wordBooks: [],
+    practiceMode: 'hanying'
   },
 
   onLoad() {
@@ -16,6 +17,11 @@ Page({
         currentIndex: 3
       })
     }
+  },
+
+  togglePracticeMode() {
+    const newMode = this.data.practiceMode === 'hanying' ? 'yinghan' : 'hanying'
+    this.setData({ practiceMode: newMode })
   },
 
   loadWordBooks() {
@@ -75,8 +81,14 @@ Page({
 
   practiceFromBook(e) {
     const bookId = e.currentTarget.dataset.id
-    wx.navigateTo({
-      url: '/pages/spelling/spelling?bookId=' + bookId
-    })
+    if (this.data.practiceMode === 'yinghan') {
+      wx.navigateTo({
+        url: '/pages/choice/choice?bookId=' + bookId
+      })
+    } else {
+      wx.navigateTo({
+        url: '/pages/spelling/spelling?bookId=' + bookId
+      })
+    }
   }
 })

@@ -74,6 +74,36 @@
   color: #CCC;
 }
 
+.toggle-row {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  padding: 20rpx 30rpx;
+  border-radius: 16rpx;
+  margin-bottom: 20rpx;
+}
+
+.toggle-label {
+  font-size: 28rpx;
+  color: #666;
+  margin-right: 20rpx;
+}
+
+.toggle-switch {
+  padding: 10rpx 30rpx;
+  background-color: #4A90E2;
+  border-radius: 30rpx;
+}
+
+.toggle-switch.active {
+  background-color: #52C41A;
+}
+
+.toggle-text {
+  font-size: 26rpx;
+  color: #fff;
+}
+
 .empty-tip {
   text-align: center;
   padding: 80rpx 0;

@@ -1,4 +1,5 @@
 const audioService = require('../../services/audio')
+const wordBookService = require('../../services/wordBook')
 
 Page({
   data: {
@@ -32,6 +33,25 @@ Page({
         this.generateOptions()
       } catch (e) {
         wx.showToast({ title: '加载失败', icon: 'none' })
+        wx.navigateBack()
+      }
+    } else if (options.bookId) {
+      const book = wordBookService.getWordBookById(options.bookId)
+      if (book) {
+        const bookData = book.toJSON ? book.toJSON() : book
+        const words = bookData.words || []
+        if (words.length >= 4) {
+          this.setData({
+            wordList: words,
+            allWords: words,
+            currentWord: words[0]
+          })
+          this.generateOptions()
+        } else {
+          wx.showToast({ title: '至少需要4个单词', icon: 'none' })
+          wx.navigateBack()
+        }
+      } else {
         wx.navigateBack()
       }
     } else {
