@@ -8,6 +8,7 @@
     "pages/study/study",
     "pages/practice/practice",
     "pages/spelling/spelling",
+    "pages/choice/choice",
     "pages/profile/profile"
   ],
   "window": {

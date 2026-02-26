@@ -1,0 +1,59 @@
+<view class="container">
+  <view class="progress-info">
+    <text class="progress-text">{{currentIndex + 1}} / {{wordList.length}}</text>
+    <view class="progress-bar">
+      <view class="progress-fill" style="width: {{progressPercent}}%"></view>
+    </view>
+  </view>
+
+  <view class="word-card" wx:if="{{!sessionComplete}}">
+    <view class="word-text">{{currentWord.text}}</view>
+    <view class="word-phonetic-row" wx:if="{{currentWord.phonetic || currentWord.audioUrl}}">
+      <text class="word-phonetic" wx:if="{{currentWord.phonetic}}">{{currentWord.phonetic}}</text>
+      <view class="audio-btn" bindtap="playAudio" data-url="{{currentWord.audioUrl}}">
+        <text class="audio-icon">{{isPlaying ? '🔊' : '🔈'}}</text>
+      </view>
+    </view>
+    
+    <view class="options-list">
+      <view 
+        class="option-item {{selectedIndex === index ? (isCorrect ? 'correct' : 'wrong') : (showResult && index === correctIndex ? 'correct' : '')}}" 
+        wx:for="{{currentOptions}}" 
+        wx:key="index"
+        bindtap="selectOption" 
+        data-index="{{index}}">
+        <text class="option-text">{{item}}</text>
+      </view>
+    </view>
+    
+    <view class="result-tip" wx:if="{{showResult}}">
+      <text class="{{isCorrect ? 'correct' : 'wrong'}}" wx:if="{{isCorrect}}">✓ 回答正确！</text>
+      <text class="{{isCorrect ? 'correct' : 'wrong'}}" wx:else>✗ 正确答案是：{{currentWord.meaning}}</text>
+    </view>
+    
+    <view class="action-btns">
+      <button class="btn-next" bindtap="nextWord" wx:if="{{showResult}}">{{currentIndex === wordList.length - 1 ? '查看结果' : '下一个'}}</button>
+    </view>
+  </view>
+
+  <view class="session-complete" wx:if="{{sessionComplete}}">
+    <view class="complete-content">
+      <text class="complete-icon">🎉</text>
+      <text class="complete-title">练习完成！</text>
+      <view class="result-stats">
+        <view class="stat-item">
+          <text class="stat-num">{{stats.correct}}</text>
+          <text class="stat-label">正确</text>
+        </view>
+        <view class="stat-item">
+          <text class="stat-num">{{stats.wrong}}</text>
+          <text class="stat-label">错误</text>
+        </view>
+      </view>
+      <view class="complete-actions">
+        <button class="btn btn-secondary" bindtap="restartPractice">再练一遍</button>
+        <button class="btn btn-primary" bindtap="goBack">返回</button>
+      </view>
+    </view>
+  </view>
+</view>

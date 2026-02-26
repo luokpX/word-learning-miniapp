@@ -6,10 +6,18 @@
 
   <view class="section-title">练习模式</view>
   <view class="mode-list">
-    <view class="mode-item" bindtap="startQuickPractice">
+    <view class="mode-item" bindtap="startHanYingPractice">
       <text class="mode-icon">✍️</text>
       <view class="mode-info">
         <text class="mode-name">汉英练习</text>
+        <text class="mode-desc">从单词本随机抽取10个单词</text>
+      </view>
+      <text class="mode-arrow">></text>
+    </view>
+    <view class="mode-item" bindtap="startYingHanPractice">
+      <text class="mode-icon">📝</text>
+      <view class="mode-info">
+        <text class="mode-name">英汉练习</text>
         <text class="mode-desc">从单词本随机抽取10个单词</text>
       </view>
       <text class="mode-arrow">></text>
