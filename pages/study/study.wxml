@@ -52,7 +52,7 @@
             <text class="audio-text">{{isPlaying ? '播放中...' : '播放发音'}}</text>
           </view>
           <view class="speed-btn" catchtap="toggleSpeed">
-            <text class="speed-text">{{playSpeed === 1 ? '🐢 慢速' : '🐇 正常'}}</text>
+            <text class="speed-text">{{playSpeed === 1 ? '🐇 正常' : '🐢 慢速'}}</text>
           </view>
         </view>
         <text class="flip-hint">点击卡片查看释义</text>
