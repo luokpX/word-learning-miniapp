@@ -35,28 +35,28 @@
   </view>
 
   <view class="menu-list card">
-    <view class="menu-item" bindtap="viewProgress">
+    <view class="menu-item" bindtap="showDeveloping">
       <view class="menu-left">
         <text class="menu-icon">📊</text>
         <text class="menu-text">学习进度</text>
       </view>
       <text class="menu-arrow">></text>
     </view>
-    <view class="menu-item" bindtap="viewWrongWords">
+    <view class="menu-item" bindtap="showDeveloping">
       <view class="menu-left">
         <text class="menu-icon">📝</text>
         <text class="menu-text">错题本</text>
       </view>
       <text class="menu-arrow">></text>
     </view>
-    <view class="menu-item" bindtap="viewCustomBooks">
+    <view class="menu-item" bindtap="showDeveloping">
       <view class="menu-left">
         <text class="menu-icon">📚</text>
         <text class="menu-text">我的单词本</text>
       </view>
       <text class="menu-arrow">></text>
     </view>
-    <view class="menu-item" bindtap="settings">
+    <view class="menu-item" bindtap="showDeveloping">
       <view class="menu-left">
         <text class="menu-icon">⚙️</text>
         <text class="menu-text">设置</text>

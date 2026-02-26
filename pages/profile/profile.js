@@ -56,28 +56,7 @@ Page({
     })
   },
 
-  viewProgress() {
-    wx.showToast({
-      title: '功能开发中',
-      icon: 'none'
-    })
-  },
-
-  viewWrongWords() {
-    wx.showToast({
-      title: '功能开发中',
-      icon: 'none'
-    })
-  },
-
-  viewCustomBooks() {
-    wx.showToast({
-      title: '功能开发中',
-      icon: 'none'
-    })
-  },
-
-  settings() {
+  showDeveloping() {
     wx.showToast({
       title: '功能开发中',
       icon: 'none'
