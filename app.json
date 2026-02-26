@@ -1,6 +1,5 @@
 {
   "requiredBackgroundModes": ["audio"],
-  "lazyCodeLoading": "requiredComponents",
   "pages": [
     "pages/index/index",
     "pages/wordbook/wordbook",
