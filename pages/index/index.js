@@ -1,5 +1,6 @@
 const app = getApp()
 const audioService = require('../../services/audio')
+const wordBookService = require('../../services/wordBook')
 
 Page({
   data: {
@@ -56,9 +57,45 @@ Page({
     })
   },
 
-  startTest() {
+  startHanYingPractice() {
+    const allBooks = wordBookService.getAllWordBooks()
+    let allWords = []
+    allBooks.forEach(book => {
+      const bookData = book.toJSON ? book.toJSON() : book
+      if (bookData.words && bookData.words.length > 0) {
+        allWords = allWords.concat(bookData.words)
+      }
+    })
+
+    if (allWords.length === 0) {
+      wx.showToast({ title: '单词本为空', icon: 'none' })
+      return
+    }
+
+    const randomWords = allWords.sort(() => Math.random() - 0.5).slice(0, 10)
     wx.navigateTo({
-      url: '/pages/study/study?mode=test'
+      url: '/pages/spelling/spelling?words=' + encodeURIComponent(JSON.stringify(randomWords))
+    })
+  },
+
+  startYingHanPractice() {
+    const allBooks = wordBookService.getAllWordBooks()
+    let allWords = []
+    allBooks.forEach(book => {
+      const bookData = book.toJSON ? book.toJSON() : book
+      if (bookData.words && bookData.words.length > 0) {
+        allWords = allWords.concat(bookData.words)
+      }
+    })
+
+    if (allWords.length < 4) {
+      wx.showToast({ title: '至少需要4个单词', icon: 'none' })
+      return
+    }
+
+    const randomWords = allWords.sort(() => Math.random() - 0.5).slice(0, 10)
+    wx.navigateTo({
+      url: '/pages/choice/choice?words=' + encodeURIComponent(JSON.stringify(randomWords))
     })
   },
 

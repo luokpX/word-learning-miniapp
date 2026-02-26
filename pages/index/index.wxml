@@ -44,10 +44,16 @@
       <text class="action-desc">巩固已学内容</text>
     </view>
 
-    <view class="action-card" bindtap="startTest">
+    <view class="action-card" bindtap="startHanYingPractice">
+      <view class="action-icon">✍️</view>
+      <text class="action-title">汉英练习</text>
+      <text class="action-desc">看中文拼写英文</text>
+    </view>
+
+    <view class="action-card" bindtap="startYingHanPractice">
       <view class="action-icon">📝</view>
-      <text class="action-title">单词测试</text>
-      <text class="action-desc">检验学习成果</text>
+      <text class="action-title">英汉练习</text>
+      <text class="action-desc">看英文选释义</text>
     </view>
   </view>
 
