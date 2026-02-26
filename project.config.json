@@ -12,7 +12,16 @@
       "outputPath": ""
     },
     "useCompilerPlugins": false,
-    "minifyWXML": true
+    "minifyWXML": true,
+    "compileWorklet": false,
+    "uploadWithSourceMap": true,
+    "packNpmManually": false,
+    "minifyWXSS": true,
+    "localPlugins": false,
+    "disableUseStrict": false,
+    "condition": false,
+    "swc": false,
+    "disableSWC": true
   },
   "compileType": "miniprogram",
   "simulatorPluginLibVersion": {},
@@ -20,6 +29,7 @@
     "ignore": [],
     "include": []
   },
-  "appid": "wx07ff7820d12b35e5",
-  "editorSetting": {}
+  "appid": "wxd12a77f93029d469",
+  "editorSetting": {},
+  "libVersion": "3.14.2"
 }
