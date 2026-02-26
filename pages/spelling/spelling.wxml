@@ -1,0 +1,53 @@
+<view class="container">
+  <view class="progress-info">
+    <text class="progress-text">{{currentIndex + 1}} / {{wordList.length}}</text>
+    <view class="progress-bar">
+      <view class="progress-fill" style="width: {{progressPercent}}%"></view>
+    </view>
+  </view>
+
+  <view class="word-card" wx:if="{{!sessionComplete}}">
+    <view class="word-meaning">{{currentWord.meaning}}</view>
+    <view class="word-phonetic" wx:if="{{currentWord.phonetic}}">{{currentWord.phonetic}}</view>
+    
+    <input 
+      class="spell-input" 
+      placeholder="请拼写单词" 
+      value="{{userInput}}"
+      bindinput="onInput"
+      bindconfirm="checkAnswer"
+      focus="{{!showResult}}"
+    />
+    
+    <view class="result-tip" wx:if="{{showResult}}">
+      <text class="{{isCorrect ? 'correct' : 'wrong'}}" wx:if="{{isCorrect}}">✓ 正确！</text>
+      <text class="{{isCorrect ? 'correct' : 'wrong'}}" wx:else>✗ 正确拼写：{{currentWord.text}}</text>
+    </view>
+    
+    <view class="action-btns">
+      <button class="btn-check" bindtap="checkAnswer" wx:if="{{!showResult}}">检查</button>
+      <button class="btn-next" bindtap="nextWord" wx:if="{{showResult}}">{{currentIndex === wordList.length - 1 ? '查看结果' : '下一个'}}</button>
+    </view>
+  </view>
+
+  <view class="session-complete" wx:if="{{sessionComplete}}">
+    <view class="complete-content">
+      <text class="complete-icon">🎉</text>
+      <text class="complete-title">练习完成！</text>
+      <view class="result-stats">
+        <view class="stat-item">
+          <text class="stat-num">{{stats.correct}}</text>
+          <text class="stat-label">正确</text>
+        </view>
+        <view class="stat-item">
+          <text class="stat-num">{{stats.wrong}}</text>
+          <text class="stat-label">错误</text>
+        </view>
+      </view>
+      <view class="complete-actions">
+        <button class="btn btn-secondary" bindtap="restartPractice">再练一遍</button>
+        <button class="btn btn-primary" bindtap="goBack">返回</button>
+      </view>
+    </view>
+  </view>
+</view>

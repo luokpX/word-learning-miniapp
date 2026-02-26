@@ -29,6 +29,15 @@
   <view 
     class="tab-item {{currentIndex === 3 ? 'active' : ''}}" 
     data-index="3" 
+    data-path="pages/practice/practice"
+    bindtap="switchTab">
+    <text class="tab-icon">✍️</text>
+    <text class="tab-text">练习</text>
+  </view>
+  
+  <view 
+    class="tab-item {{currentIndex === 4 ? 'active' : ''}}" 
+    data-index="4" 
     data-path="pages/profile/profile"
     bindtap="switchTab">
     <text class="tab-icon">👤</text>

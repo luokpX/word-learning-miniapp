@@ -1,0 +1,179 @@
+.container {
+  min-height: 100vh;
+  background-color: #F5F5F5;
+  padding: 30rpx;
+}
+
+.progress-info {
+  margin-bottom: 40rpx;
+}
+
+.progress-text {
+  font-size: 28rpx;
+  color: #666;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.progress-bar {
+  height: 10rpx;
+  background-color: #E0E0E0;
+  border-radius: 5rpx;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: #4A90E2;
+  transition: width 0.3s;
+}
+
+.word-card {
+  background-color: #fff;
+  border-radius: 20rpx;
+  padding: 60rpx 40rpx;
+  text-align: center;
+}
+
+.word-meaning {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+}
+
+.word-phonetic {
+  font-size: 32rpx;
+  color: #999;
+  margin-bottom: 40rpx;
+}
+
+.spell-input {
+  width: 100%;
+  height: 100rpx;
+  border: 4rpx solid #4A90E2;
+  border-radius: 16rpx;
+  padding: 0 30rpx;
+  font-size: 40rpx;
+  text-align: center;
+  margin-bottom: 30rpx;
+}
+
+.result-tip {
+  font-size: 32rpx;
+  margin-bottom: 30rpx;
+  padding: 20rpx;
+  border-radius: 10rpx;
+}
+
+.result-tip .correct {
+  color: #52C41A;
+  font-weight: bold;
+}
+
+.result-tip .wrong {
+  color: #FF4D4F;
+  font-weight: bold;
+}
+
+.action-btns {
+  margin-top: 30rpx;
+}
+
+.btn-check, .btn-next {
+  width: 100%;
+  height: 100rpx;
+  line-height: 100rpx;
+  font-size: 36rpx;
+  border-radius: 16rpx;
+  border: none;
+}
+
+.btn-check {
+  background-color: #4A90E2;
+  color: #fff;
+}
+
+.btn-next {
+  background-color: #52C41A;
+  color: #fff;
+}
+
+.session-complete {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #F5F5F5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.complete-content {
+  text-align: center;
+}
+
+.complete-icon {
+  font-size: 120rpx;
+  display: block;
+}
+
+.complete-title {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #333;
+  margin: 30rpx 0;
+  display: block;
+}
+
+.result-stats {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 60rpx;
+}
+
+.stat-item {
+  margin: 0 40rpx;
+  text-align: center;
+}
+
+.stat-num {
+  font-size: 60rpx;
+  font-weight: bold;
+  color: #4A90E2;
+  display: block;
+}
+
+.stat-label {
+  font-size: 28rpx;
+  color: #999;
+  margin-top: 10rpx;
+  display: block;
+}
+
+.complete-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.btn {
+  width: 300rpx;
+  height: 90rpx;
+  line-height: 90rpx;
+  font-size: 32rpx;
+  border-radius: 16rpx;
+}
+
+.btn-primary {
+  background-color: #4A90E2;
+  color: #fff;
+}
+
+.btn-secondary {
+  background-color: #fff;
+  color: #4A90E2;
+  border: 2rpx solid #4A90E2;
+}

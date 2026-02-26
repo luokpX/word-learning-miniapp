@@ -1,0 +1,40 @@
+<view class="container">
+  <view class="header">
+    <text class="header-title">选择练习内容</text>
+    <text class="header-subtitle">选择你要练习的内容</text>
+  </view>
+
+  <view class="section-title">练习模式</view>
+  <view class="mode-list">
+    <view class="mode-item" bindtap="startQuickPractice">
+      <text class="mode-icon">✍️</text>
+      <view class="mode-info">
+        <text class="mode-name">快速练习</text>
+        <text class="mode-desc">从单词本随机抽取10个单词</text>
+      </view>
+      <text class="mode-arrow">></text>
+    </view>
+  </view>
+
+  <view class="section-title">我的单词本</view>
+  <view class="book-list">
+    <view 
+      class="book-item" 
+      wx:for="{{wordBooks}}" 
+      wx:key="id"
+      bindtap="practiceFromBook" 
+      data-id="{{item.id}}">
+      <text class="book-icon">📖</text>
+      <view class="book-info">
+        <text class="book-name">{{item.name}}</text>
+        <text class="book-count">{{item.words ? item.words.length : 0}} 个单词</text>
+      </view>
+      <text class="book-arrow">></text>
+    </view>
+  </view>
+
+  <view class="empty-tip" wx:if="{{wordBooks.length === 0}}">
+    <text class="empty-text">还没有单词本</text>
+    <text class="empty-hint">去"单词本"页面创建</text>
+  </view>
+</view>

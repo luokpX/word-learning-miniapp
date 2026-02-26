@@ -6,6 +6,8 @@
     "pages/wordbook-detail/wordbook-detail",
     "pages/study-select/study-select",
     "pages/study/study",
+    "pages/practice/practice",
+    "pages/spelling/spelling",
     "pages/profile/profile"
   ],
   "window": {
@@ -33,6 +35,10 @@
       {
         "pagePath": "pages/study-select/study-select",
         "text": "学习"
+      },
+      {
+        "pagePath": "pages/practice/practice",
+        "text": "练习"
       },
       {
         "pagePath": "pages/profile/profile",

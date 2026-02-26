@@ -1,0 +1,93 @@
+.container {
+  min-height: 100vh;
+  background-color: #F5F5F5;
+  padding: 30rpx;
+}
+
+.header {
+  margin-bottom: 40rpx;
+}
+
+.header-title {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #333;
+  display: block;
+}
+
+.header-subtitle {
+  font-size: 28rpx;
+  color: #999;
+  margin-top: 10rpx;
+  display: block;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+  margin: 30rpx 0 20rpx;
+}
+
+.mode-list, .book-list {
+  background-color: #fff;
+  border-radius: 16rpx;
+  overflow: hidden;
+}
+
+.mode-item, .book-item {
+  display: flex;
+  align-items: center;
+  padding: 30rpx;
+  border-bottom: 1rpx solid #F0F0F0;
+}
+
+.mode-item:last-child, .book-item:last-child {
+  border-bottom: none;
+}
+
+.mode-icon, .book-icon {
+  font-size: 48rpx;
+  margin-right: 20rpx;
+}
+
+.mode-info, .book-info {
+  flex: 1;
+}
+
+.mode-name, .book-name {
+  font-size: 32rpx;
+  color: #333;
+  font-weight: 500;
+  display: block;
+}
+
+.mode-desc, .book-count {
+  font-size: 26rpx;
+  color: #999;
+  margin-top: 6rpx;
+  display: block;
+}
+
+.mode-arrow, .book-arrow {
+  font-size: 32rpx;
+  color: #CCC;
+}
+
+.empty-tip {
+  text-align: center;
+  padding: 80rpx 0;
+}
+
+.empty-text {
+  font-size: 32rpx;
+  color: #999;
+  display: block;
+}
+
+.empty-hint {
+  font-size: 26rpx;
+  color: #CCC;
+  margin-top: 10rpx;
+  display: block;
+}
