@@ -82,7 +82,8 @@ class WordBookService {
         const word = this.addWordToBook(bookId, {
           text: parts[0],
           phonetic: parts[1] || '',
-          meaning: parts[2] || ''
+          meaning: parts[2] || '',
+          examples: parts[3] ? [parts[3]] : []
         })
         if (word) {
           addedWords.push(word)

@@ -72,8 +72,8 @@
       <text class="modal-title">导入单词</text>
       <view class="import-tips">
         <text class="tips-title">导入格式说明：</text>
-        <text class="tips-text">每行一个单词，格式：单词,音标,释义</text>
-        <text class="tips-text">例如：apple,/ˈæpl/,苹果</text>
+        <text class="tips-text">每行一个单词，格式：单词,音标,释义,例句</text>
+        <text class="tips-text">例如：apple,/ˈæpl/,苹果,I like apple.</text>
       </view>
       <view class="form-item">
         <textarea class="import-textarea" placeholder="请粘贴单词列表" value="{{importText}}" bindinput="onImportInput" maxlength="-1"></textarea>
