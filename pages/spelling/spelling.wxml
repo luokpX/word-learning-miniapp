@@ -15,14 +15,25 @@
       </view>
     </view>
     
-    <input 
-      class="spell-input" 
-      placeholder="请拼写单词" 
-      value="{{userInput}}"
-      bindinput="onInput"
-      bindconfirm="checkAnswer"
-      focus="{{!showResult}}"
-    />
+    <view class="spell-input-container" bindtap="focusInput">
+      <view class="letter-boxes">
+        <view 
+          class="letter-box {{userInput.length > index ? 'filled' : ''}}" 
+          wx:for="{{letterCount}}" 
+          wx:key="index">
+          <text class="letter-text">{{userInput[index] || ''}}</text>
+          <view class="underline"></view>
+        </view>
+      </view>
+      <input 
+        class="hidden-input" 
+        value="{{userInput}}"
+        bindinput="onInput"
+        bindconfirm="checkAnswer"
+        focus="{{inputFocused && !showResult}}"
+        maxlength="{{letterCount}}"
+      />
+    </view>
     
     <view class="result-tip" wx:if="{{showResult}}">
       <text class="{{isCorrect ? 'correct' : 'wrong'}}" wx:if="{{isCorrect}}">✓ 正确！</text>

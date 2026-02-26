@@ -7,6 +7,8 @@ Page({
     currentIndex: 0,
     currentWord: {},
     userInput: '',
+    letterCount: 0,
+    inputFocused: true,
     showResult: false,
     isCorrect: false,
     isPlaying: false,
@@ -22,9 +24,11 @@ Page({
     if (options.words) {
       try {
         const words = JSON.parse(decodeURIComponent(options.words))
+        const letterCount = words[0] ? words[0].text.length : 0
         this.setData({
           wordList: words,
-          currentWord: words[0]
+          currentWord: words[0],
+          letterCount: letterCount
         })
       } catch (e) {
         wx.showToast({ title: '加载失败', icon: 'none' })
@@ -38,7 +42,8 @@ Page({
         if (words.length > 0) {
           this.setData({
             wordList: words,
-            currentWord: words[0]
+            currentWord: words[0],
+            letterCount: words[0].text.length
           })
         } else {
           wx.showToast({ title: '单词本为空', icon: 'none' })
@@ -58,6 +63,10 @@ Page({
     this.setData({
       userInput: e.detail.value
     })
+  },
+
+  focusInput() {
+    this.setData({ inputFocused: true })
   },
 
   playAudio(e) {
@@ -101,14 +110,17 @@ Page({
 
     const nextIndex = this.data.currentIndex + 1
     const progress = ((nextIndex + 1) / this.data.wordList.length) * 100
+    const nextWord = this.data.wordList[nextIndex]
 
     this.setData({
       currentIndex: nextIndex,
-      currentWord: this.data.wordList[nextIndex],
+      currentWord: nextWord,
       userInput: '',
+      letterCount: nextWord.text.length,
       showResult: false,
       isCorrect: false,
-      progressPercent: progress
+      progressPercent: progress,
+      inputFocused: true
     })
   },
 
@@ -125,10 +137,12 @@ Page({
       currentIndex: 0,
       currentWord: shuffled[0],
       userInput: '',
+      letterCount: shuffled[0].text.length,
       showResult: false,
       isCorrect: false,
       progressPercent: 0,
       sessionComplete: false,
+      inputFocused: true,
       stats: {
         correct: 0,
         wrong: 0
