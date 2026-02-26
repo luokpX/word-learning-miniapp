@@ -46,10 +46,34 @@ Page({
         words = bookData.words || []
       }
     } else if (this.data.mode === 'learn') {
-      words = wordService.getRandomWords(10)
+      const allBooks = wordBookService.getAllWordBooks()
+      let allWords = []
+      allBooks.forEach(book => {
+        const bookData = book.toJSON ? book.toJSON() : book
+        if (bookData.words && bookData.words.length > 0) {
+          allWords = allWords.concat(bookData.words)
+        }
+      })
+      if (allWords.length > 0) {
+        words = allWords.sort(() => Math.random() - 0.5).slice(0, 10)
+      } else {
+        words = wordService.getRandomWords(10)
+      }
     } else if (this.data.mode === 'review') {
       const recent = StorageService.getRecentWords(20)
-      words = recent.length > 0 ? recent : wordService.getRandomWords(10)
+      if (recent.length > 0) {
+        words = recent
+      } else {
+        const allBooks = wordBookService.getAllWordBooks()
+        let allWords = []
+        allBooks.forEach(book => {
+          const bookData = book.toJSON ? book.toJSON() : book
+          if (bookData.words && bookData.words.length > 0) {
+            allWords = allWords.concat(bookData.words)
+          }
+        })
+        words = allWords.length > 0 ? allWords.sort(() => Math.random() - 0.5).slice(0, 10) : wordService.getRandomWords(10)
+      }
     } else {
       words = wordService.getRandomWords(10)
     }
