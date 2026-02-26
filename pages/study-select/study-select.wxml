@@ -22,22 +22,6 @@
       </view>
       <text class="mode-arrow">></text>
     </view>
-    <view class="mode-item" bindtap="startHanYingPractice">
-      <text class="mode-icon">✍️</text>
-      <view class="mode-info">
-        <text class="mode-name">汉英练习</text>
-        <text class="mode-desc">看中文拼写英文</text>
-      </view>
-      <text class="mode-arrow">></text>
-    </view>
-    <view class="mode-item" bindtap="startYingHanPractice">
-      <text class="mode-icon">📝</text>
-      <view class="mode-info">
-        <text class="mode-name">英汉练习</text>
-        <text class="mode-desc">看英文选中文释义</text>
-      </view>
-      <text class="mode-arrow">></text>
-    </view>
   </view>
 
   <view class="section-title">我的单词本</view>
