@@ -22,14 +22,6 @@
       </view>
       <text class="mode-arrow">></text>
     </view>
-    <view class="mode-item" bindtap="startLearn" data-mode="test">
-      <text class="mode-icon">📝</text>
-      <view class="mode-info">
-        <text class="mode-name">单词测试</text>
-        <text class="mode-desc">测试你的词汇量</text>
-      </view>
-      <text class="mode-arrow">></text>
-    </view>
   </view>
 
   <view class="section-title">我的单词本</view>
