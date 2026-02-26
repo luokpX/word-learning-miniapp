@@ -77,17 +77,44 @@ class WordBookService {
     const addedWords = []
     
     lines.forEach(line => {
-      const parts = line.split(/[,，、\t]+/).map(p => p.trim()).filter(p => p)
-      if (parts.length >= 2) {
-        const word = this.addWordToBook(bookId, {
-          text: parts[0],
-          phonetic: parts[1] || '',
-          meaning: parts[2] || '',
-          examples: parts[3] ? [parts[3]] : []
-        })
-        if (word) {
-          addedWords.push(word)
+      const trimmed = line.trim()
+      if (!trimmed) return
+      
+      const firstDelim = trimmed.search(/[,，\t]/)
+      if (firstDelim === -1) return
+      
+      const text = trimmed.substring(0, firstDelim).trim()
+      if (!text) return
+      
+      const rest = trimmed.substring(firstDelim + 1)
+      const secondDelim = rest.search(/[,，\t]/)
+      
+      let phonetic = ''
+      let meaning = ''
+      let examplePart = ''
+      
+      if (secondDelim === -1) {
+        phonetic = rest.trim()
+      } else {
+        phonetic = rest.substring(0, secondDelim).trim()
+        const remaining = rest.substring(secondDelim + 1)
+        const thirdDelim = remaining.search(/[,，\t]/)
+        if (thirdDelim === -1) {
+          meaning = remaining.trim()
+        } else {
+          meaning = remaining.substring(0, thirdDelim).trim()
+          examplePart = remaining.substring(thirdDelim + 1).trim()
         }
+      }
+      
+      const word = this.addWordToBook(bookId, {
+        text: text,
+        phonetic: phonetic,
+        meaning: meaning,
+        examples: examplePart ? [examplePart] : []
+      })
+      if (word) {
+        addedWords.push(word)
       }
     })
     
