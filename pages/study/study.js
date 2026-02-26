@@ -83,6 +83,8 @@ Page({
         wordList: words,
         currentWord: words[0],
         progressPercent: 0
+      }, () => {
+        this.autoPlayAudio()
       })
     } else {
       wx.showToast({
@@ -99,6 +101,22 @@ Page({
     this.setData({
       isFlipped: !this.data.isFlipped
     })
+  },
+
+  autoPlayAudio() {
+    const url = this.data.currentWord.audioUrl
+    if (url) {
+      this.setData({ isPlaying: true })
+      audioService.playWordAudio(url, {
+        playbackRate: this.data.playSpeed,
+        onEnded: () => {
+          this.setData({ isPlaying: false })
+        },
+        onError: () => {
+          this.setData({ isPlaying: false })
+        }
+      })
+    }
   },
 
   playAudio(e) {
@@ -194,6 +212,8 @@ Page({
       currentWord: this.data.wordList[nextIndex],
       isFlipped: false,
       progressPercent: progress
+    }, () => {
+      this.autoPlayAudio()
     })
   },
 

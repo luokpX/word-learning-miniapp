@@ -29,8 +29,10 @@ Page({
           wordList: wordList,
           allWords: wordList,
           currentWord: wordList[0]
+        }, () => {
+          this.generateOptions()
+          this.autoPlayAudio()
         })
-        this.generateOptions()
       } catch (e) {
         wx.showToast({ title: '加载失败', icon: 'none' })
         wx.navigateBack()
@@ -45,8 +47,10 @@ Page({
             wordList: words,
             allWords: words,
             currentWord: words[0]
+          }, () => {
+            this.generateOptions()
+            this.autoPlayAudio()
           })
-          this.generateOptions()
         } else {
           wx.showToast({ title: '至少需要4个单词', icon: 'none' })
           wx.navigateBack()
@@ -61,6 +65,21 @@ Page({
 
   onUnload() {
     audioService.stopAudio()
+  },
+
+  autoPlayAudio() {
+    const url = this.data.currentWord.audioUrl
+    if (url) {
+      this.setData({ isPlaying: true })
+      audioService.playWordAudio(url, {
+        onEnded: () => {
+          this.setData({ isPlaying: false })
+        },
+        onError: () => {
+          this.setData({ isPlaying: false })
+        }
+      })
+    }
   },
 
   generateOptions() {
@@ -136,6 +155,7 @@ Page({
     })
 
     this.generateOptions()
+    this.autoPlayAudio()
   },
 
   completeSession() {

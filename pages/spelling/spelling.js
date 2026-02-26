@@ -29,6 +29,8 @@ Page({
           wordList: words,
           currentWord: words[0],
           letterCount: letterCount
+        }, () => {
+          this.autoPlayAudio()
         })
       } catch (e) {
         wx.showToast({ title: '加载失败', icon: 'none' })
@@ -44,6 +46,8 @@ Page({
             wordList: words,
             currentWord: words[0],
             letterCount: words[0].text.length
+          }, () => {
+            this.autoPlayAudio()
           })
         } else {
           wx.showToast({ title: '单词本为空', icon: 'none' })
@@ -67,6 +71,21 @@ Page({
 
   focusInput() {
     this.setData({ inputFocused: true })
+  },
+
+  autoPlayAudio() {
+    const url = this.data.currentWord.audioUrl
+    if (url) {
+      this.setData({ isPlaying: true })
+      audioService.playWordAudio(url, {
+        onEnded: () => {
+          this.setData({ isPlaying: false })
+        },
+        onError: () => {
+          this.setData({ isPlaying: false })
+        }
+      })
+    }
   },
 
   playAudio(e) {
@@ -121,6 +140,8 @@ Page({
       isCorrect: false,
       progressPercent: progress,
       inputFocused: true
+    }, () => {
+      this.autoPlayAudio()
     })
   },
 
