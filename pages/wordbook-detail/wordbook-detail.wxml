@@ -76,7 +76,7 @@
         <text class="tips-text">例如：apple,/ˈæpl/,苹果</text>
       </view>
       <view class="form-item">
-        <textarea class="import-textarea" placeholder="请粘贴单词列表" value="{{importText}}" bindinput="onImportInput"></textarea>
+        <textarea class="import-textarea" placeholder="请粘贴单词列表" value="{{importText}}" bindinput="onImportInput" maxlength="-1"></textarea>
       </view>
       <view class="modal-buttons">
         <button class="btn-cancel" bindtap="closeImportModal">取消</button>
