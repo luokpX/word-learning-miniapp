@@ -9,7 +9,7 @@
     <view class="mode-item" bindtap="startQuickPractice">
       <text class="mode-icon">✍️</text>
       <view class="mode-info">
-        <text class="mode-name">快速练习</text>
+        <text class="mode-name">汉英练习</text>
         <text class="mode-desc">从单词本随机抽取10个单词</text>
       </view>
       <text class="mode-arrow">></text>
