@@ -3,7 +3,7 @@ const StorageService = require('../../utils/storage')
 Page({
   data: {
     userInfo: null,
-    level: 1,
+    level: 99,
     isParentBound: false,
     pronunciationType: 2,
     studyStats: {

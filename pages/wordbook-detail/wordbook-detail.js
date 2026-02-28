@@ -17,7 +17,7 @@ Page({
       meaning: ''
     },
     importText: '',
-    importMode: 'manual',
+    importMode: 'auto',
     importProgress: null,
     isImporting: false
   },
