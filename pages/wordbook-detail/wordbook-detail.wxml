@@ -70,17 +70,44 @@
     <view class="modal-mask" bindtap="closeImportModal"></view>
     <view class="modal-content">
       <text class="modal-title">导入单词</text>
-      <view class="import-tips">
+      
+      <view class="import-mode-tabs">
+        <view class="mode-tab {{importMode === 'manual' ? 'active' : ''}}" bindtap="switchImportMode" data-mode="manual">
+          <text>手动导入</text>
+        </view>
+        <view class="mode-tab {{importMode === 'auto' ? 'active' : ''}}" bindtap="switchImportMode" data-mode="auto">
+          <text>自动补全</text>
+        </view>
+      </view>
+
+      <view class="import-tips" wx:if="{{importMode === 'manual'}}">
         <text class="tips-title">导入格式说明：</text>
         <text class="tips-text">每行一个单词，格式：单词,音标,释义,例句</text>
         <text class="tips-text">例如：apple,/ˈæpl/,苹果,I like apple.</text>
       </view>
-      <view class="form-item">
-        <textarea class="import-textarea" placeholder="请粘贴单词列表" value="{{importText}}" bindinput="onImportInput" maxlength="-1"></textarea>
+
+      <view class="import-tips" wx:if="{{importMode === 'auto'}}">
+        <text class="tips-title">自动补全说明：</text>
+        <text class="tips-text">每行一个单词，自动查询音标、释义、例句</text>
+        <text class="tips-text">例如：apple</text>
+        <text class="tips-text tips-warning">需要网络连接，导入速度较慢</text>
       </view>
+
+      <view class="form-item">
+        <textarea class="import-textarea" placeholder="{{importMode === 'manual' ? '请粘贴单词列表' : '请粘贴单词，每行一个'}}" value="{{importText}}" bindinput="onImportInput" maxlength="-1" disabled="{{isImporting}}"></textarea>
+      </view>
+
+      <view class="import-progress" wx:if="{{isImporting && importProgress}}">
+        <view class="progress-bar">
+          <view class="progress-fill" style="width: {{importProgress.current / importProgress.total * 100}}%"></view>
+        </view>
+        <text class="progress-text">正在查询: {{importProgress.currentWord}} ({{importProgress.current}}/{{importProgress.total}})</text>
+        <text class="progress-stats">成功: {{importProgress.success}} | 失败: {{importProgress.failed}}</text>
+      </view>
+
       <view class="modal-buttons">
-        <button class="btn-cancel" bindtap="closeImportModal">取消</button>
-        <button class="btn-confirm" bindtap="confirmImport">导入</button>
+        <button class="btn-cancel" bindtap="closeImportModal" disabled="{{isImporting}}">取消</button>
+        <button class="btn-confirm" bindtap="confirmImport" disabled="{{isImporting}}">{{isImporting ? '导入中...' : '导入'}}</button>
       </view>
     </view>
   </view>

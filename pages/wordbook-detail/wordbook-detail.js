@@ -16,7 +16,10 @@ Page({
       phonetic: '',
       meaning: ''
     },
-    importText: ''
+    importText: '',
+    importMode: 'manual',
+    importProgress: null,
+    isImporting: false
   },
 
   onLoad(options) {
@@ -163,10 +166,42 @@ Page({
       return
     }
 
-    const added = wordBookService.importWordsFromText(this.data.bookId, text)
-    this.loadBook(this.data.bookId)
-    this.setData({ showImportModal: false })
-    wx.showToast({ title: `已导入 ${added.length} 个单词` })
+    if (this.data.importMode === 'auto') {
+      this.doAutoImport(text)
+    } else {
+      const added = wordBookService.importWordsFromText(this.data.bookId, text)
+      this.loadBook(this.data.bookId)
+      this.setData({ showImportModal: false })
+      wx.showToast({ title: `已导入 ${added.length} 个单词` })
+    }
+  },
+
+  doAutoImport(text) {
+    this.setData({ isImporting: true, importProgress: { current: 0, total: 0, success: 0, failed: 0 } })
+
+    wordBookService.importWordsAuto(this.data.bookId, text, (progress) => {
+      this.setData({
+        importProgress: progress
+      })
+    }).then((result) => {
+      this.setData({ isImporting: false, showImportModal: false, importProgress: null })
+      this.loadBook(this.data.bookId)
+      
+      let message = `成功导入 ${result.addedWords.length} 个单词`
+      if (result.failedWords.length > 0) {
+        message += `，${result.failedWords.length} 个失败`
+      }
+      wx.showToast({ title: message, icon: 'none' })
+    }).catch((err) => {
+      this.setData({ isImporting: false, importProgress: null })
+      wx.showToast({ title: '导入失败', icon: 'none' })
+      console.error('Auto import error:', err)
+    })
+  },
+
+  switchImportMode(e) {
+    const mode = e.currentTarget.dataset.mode
+    this.setData({ importMode: mode })
   },
 
   deleteWord(e) {

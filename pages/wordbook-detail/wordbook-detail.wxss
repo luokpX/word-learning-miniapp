@@ -232,3 +232,67 @@
   background-color: #4A90E2;
   color: #ffffff;
 }
+
+.import-mode-tabs {
+  display: flex;
+  margin-bottom: 30rpx;
+  border-radius: 10rpx;
+  overflow: hidden;
+  border: 2rpx solid #4A90E2;
+}
+
+.mode-tab {
+  flex: 1;
+  height: 70rpx;
+  line-height: 70rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color: #4A90E2;
+  background-color: #ffffff;
+}
+
+.mode-tab.active {
+  background-color: #4A90E2;
+  color: #ffffff;
+}
+
+.tips-warning {
+  color: #FF9800;
+  margin-top: 10rpx;
+}
+
+.import-progress {
+  margin-bottom: 30rpx;
+  padding: 20rpx;
+  background-color: #F5F5F5;
+  border-radius: 10rpx;
+}
+
+.progress-bar {
+  height: 20rpx;
+  background-color: #E8E8E8;
+  border-radius: 10rpx;
+  overflow: hidden;
+  margin-bottom: 15rpx;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: #4A90E2;
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  font-size: 24rpx;
+  color: #666666;
+  display: block;
+  text-align: center;
+  margin-bottom: 10rpx;
+}
+
+.progress-stats {
+  font-size: 24rpx;
+  color: #999999;
+  display: block;
+  text-align: center;
+}

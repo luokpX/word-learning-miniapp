@@ -1,5 +1,6 @@
 const WordBook = require('../models/wordBook')
 const StorageService = require('../utils/storage')
+const DictionaryService = require('./dictionary')
 
 class WordBookService {
   constructor() {
@@ -119,6 +120,44 @@ class WordBookService {
     })
     
     return addedWords
+  }
+
+  async importWordsAuto(bookId, text, onProgress) {
+    const lines = text.split('\n').filter(line => line.trim())
+    const words = lines.map(line => {
+      const trimmed = line.trim()
+      const firstDelim = trimmed.search(/[,，\t]/)
+      if (firstDelim === -1) {
+        return trimmed
+      }
+      return trimmed.substring(0, firstDelim).trim()
+    }).filter(w => w)
+
+    const addedWords = []
+    const failedWords = []
+
+    await DictionaryService.batchLookup(words, async (current, total, word, result) => {
+      if (result.error) {
+        failedWords.push(word)
+      } else if (result.data) {
+        const wordData = this.addWordToBook(bookId, result.data)
+        if (wordData) {
+          addedWords.push(wordData)
+        }
+      }
+
+      if (onProgress) {
+        onProgress({
+          current,
+          total,
+          success: addedWords.length,
+          failed: failedWords.length,
+          currentWord: word
+        })
+      }
+    })
+
+    return { addedWords, failedWords }
   }
 
   saveBooks(books) {
