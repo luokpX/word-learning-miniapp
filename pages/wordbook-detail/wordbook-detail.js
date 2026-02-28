@@ -220,13 +220,9 @@ Page({
   },
 
   playWord(e) {
-    let url = e.currentTarget.dataset.url
-    const text = e.currentTarget.dataset.text
-    if (!url && text) {
-      url = `https://dict.youdao.com/dictvoice?audio=${encodeURIComponent(text)}&type=1`
-    }
-    if (url) {
-      audioService.playWordAudio(url)
+    const word = e.currentTarget.dataset.word
+    if (word) {
+      audioService.playWordFromObject(word)
     } else {
       wx.showToast({ title: '无法播放发音', icon: 'none' })
     }

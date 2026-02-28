@@ -5,6 +5,7 @@ Page({
     userInfo: null,
     level: 1,
     isParentBound: false,
+    pronunciationType: 2,
     studyStats: {
       totalDays: 0,
       masteredCount: 0,
@@ -25,6 +26,7 @@ Page({
   onLoad() {
     this.loadUserInfo()
     this.loadStats()
+    this.loadPronunciationType()
   },
 
   onShow() {
@@ -53,6 +55,21 @@ Page({
         currentStreak: streak
       },
       level: Math.floor(mastered.length / 10) + 1
+    })
+  },
+
+  loadPronunciationType() {
+    const pronunciationType = StorageService.getPronunciationType()
+    this.setData({ pronunciationType })
+  },
+
+  togglePronunciation() {
+    const newType = this.data.pronunciationType === 2 ? 1 : 2
+    StorageService.setPronunciationType(newType)
+    this.setData({ pronunciationType: newType })
+    wx.showToast({
+      title: newType === 2 ? '已切换为美式发音' : '已切换为英式发音',
+      icon: 'none'
     })
   },
 

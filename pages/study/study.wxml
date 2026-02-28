@@ -44,7 +44,7 @@
           <text class="word-phonetic">{{currentWord.phonetic}}</text>
         </view>
         <view class="audio-controls">
-          <view class="audio-btn {{isPlaying ? 'playing' : ''}}" catchtap="playAudio" data-url="{{currentWord.audioUrl}}">
+          <view class="audio-btn {{isPlaying ? 'playing' : ''}}" catchtap="playAudio" data-word="{{currentWord}}">
             <text class="audio-icon-emoji">{{isPlaying ? '🔊' : '▶️'}}</text>
             <text class="audio-text">{{isPlaying ? '播放中...' : '播放发音'}}</text>
           </view>

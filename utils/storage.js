@@ -65,6 +65,14 @@ class StorageService {
     const words = this.get('recentWords', [])
     return words.slice(0, limit)
   }
+
+  static getPronunciationType() {
+    return this.get('pronunciationType', 2)
+  }
+
+  static setPronunciationType(type) {
+    return this.set('pronunciationType', type)
+  }
 }
 
 module.exports = StorageService

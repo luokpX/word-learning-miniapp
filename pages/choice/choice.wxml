@@ -10,7 +10,7 @@
     <view class="word-text">{{currentWord.text}}</view>
     <view class="word-phonetic-row" wx:if="{{currentWord.phonetic || currentWord.audioUrl}}">
       <text class="word-phonetic" wx:if="{{currentWord.phonetic}}">{{currentWord.phonetic}}</text>
-      <view class="audio-btn" bindtap="playAudio" data-url="{{currentWord.audioUrl}}">
+      <view class="audio-btn" bindtap="playAudio" data-word="{{currentWord}}">
         <text class="audio-icon">{{isPlaying ? '🔊' : '🔈'}}</text>
       </view>
     </view>

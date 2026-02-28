@@ -1,6 +1,24 @@
+const StorageService = require('../utils/storage')
+
 class AudioService {
   constructor() {
     this.bgAudioManager = wx.getBackgroundAudioManager()
+  }
+
+  getAudioUrl(text) {
+    if (!text) return ''
+    const type = StorageService.getPronunciationType()
+    return `https://dict.youdao.com/dictvoice?audio=${encodeURIComponent(text)}&type=${type}`
+  }
+
+  playWordByText(text, options = {}) {
+    const url = this.getAudioUrl(text)
+    this.playWordAudio(url, options)
+  }
+
+  playWordFromObject(word, options = {}) {
+    if (!word) return
+    this.playWordByText(word.text || word.word, options)
   }
 
   playWordAudio(url, options = {}) {

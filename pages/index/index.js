@@ -107,6 +107,6 @@ Page({
 
   playWord(e) {
     const word = e.currentTarget.dataset.word
-    audioService.playWordAudio(word.audioUrl)
+    audioService.playWordFromObject(word)
   }
 })

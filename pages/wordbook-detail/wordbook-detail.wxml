@@ -25,13 +25,13 @@
 
   <view class="word-list">
     <view class="word-item" wx:for="{{book.words}}" wx:key="id">
-      <view class="word-info" bindtap="playWord" data-url="{{item.audioUrl}}">
+      <view class="word-info" bindtap="playWord" data-word="{{item}}">
         <text class="word-text">{{item.text}}</text>
         <text class="word-phonetic">{{item.phonetic}}</text>
         <text class="word-meaning">{{item.meaning}}</text>
       </view>
       <view class="word-actions">
-        <text class="play-btn" catchtap="playWord" data-url="{{item.audioUrl}}" data-text="{{item.text}}">🔊</text>
+        <text class="play-btn" catchtap="playWord" data-word="{{item}}">🔊</text>
         <text class="delete-btn" catchtap="deleteWord" data-id="{{item.id}}">✕</text>
       </view>
     </view>

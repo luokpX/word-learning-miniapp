@@ -104,10 +104,10 @@ Page({
   },
 
   autoPlayAudio() {
-    const url = this.data.currentWord.audioUrl
-    if (url) {
+    const word = this.data.currentWord
+    if (word) {
       this.setData({ isPlaying: true })
-      audioService.playWordAudio(url, {
+      audioService.playWordFromObject(word, {
         playbackRate: this.data.playSpeed,
         onEnded: () => {
           this.setData({ isPlaying: false })
@@ -120,10 +120,10 @@ Page({
   },
 
   playAudio(e) {
-    const url = e.currentTarget.dataset.url
-    if (url) {
+    const word = e.currentTarget.dataset.word
+    if (word) {
       this.setData({ isPlaying: true })
-      audioService.playWordAudio(url, {
+      audioService.playWordFromObject(word, {
         playbackRate: this.data.playSpeed,
         onEnded: () => {
           this.setData({ isPlaying: false })
