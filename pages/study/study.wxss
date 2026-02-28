@@ -52,7 +52,7 @@
 
 .flashcard {
   width: calc(100% - 40rpx);
-  height: 450rpx;
+  height: 550rpx;
   perspective: 1000rpx;
   cursor: pointer;
 }
@@ -256,6 +256,7 @@
 .study-controls {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 30rpx 40rpx 50rpx;
 }
 
@@ -264,6 +265,14 @@
   border-radius: 50rpx;
   font-size: 30rpx;
   font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 160rpx;
+}
+
+.control-btn text {
+  line-height: 1;
 }
 
 .control-btn.prev {
