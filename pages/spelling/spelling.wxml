@@ -11,7 +11,7 @@
     <image 
       class="hint-image" 
       src="{{currentWord.imageUrl}}" 
-      mode="aspectFill"
+      mode="aspectFit"
       wx:if="{{currentWord.imageUrl}}"
     />
     
