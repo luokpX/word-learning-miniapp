@@ -1,6 +1,7 @@
 const WordBook = require('../models/wordBook')
 const StorageService = require('../utils/storage')
 const DictionaryService = require('./dictionary')
+const ImageService = require('./image')
 
 class WordBookService {
   constructor() {
@@ -140,6 +141,8 @@ class WordBookService {
       if (result.error) {
         failedWords.push(word)
       } else if (result.data) {
+        // imageUrl 默认为空，后台异步获取
+        result.data.imageUrl = ''
         const wordData = this.addWordToBook(bookId, result.data)
         if (wordData) {
           addedWords.push(wordData)
@@ -157,12 +160,72 @@ class WordBookService {
       }
     })
 
+    // 后台异步获取图片
+    this.fetchImagesInBackground(addedWords)
+
     return { addedWords, failedWords }
   }
 
   saveBooks(books) {
     const data = books.map(book => book.toJSON())
     StorageService.set(this.storageKey, data)
+  }
+
+  /**
+   * 后台异步获取单词图片
+   * @param {Array} words - 单词数组 [{id, text, ...}]
+   */
+  async fetchImagesInBackground(words) {
+    // 放入下一个事件循环，不阻塞 UI
+    setTimeout(async () => {
+      console.log(`[ImageService] Starting background image fetch for ${words.length} words`)
+      
+      for (const word of words) {
+        try {
+          console.log(`[ImageService] Fetching image for: ${word.text}`)
+          const imageUrl = await ImageService.searchAndDownload(word.text)
+          
+          if (imageUrl) {
+            console.log(`[ImageService] Success: ${word.text}`)
+            this.updateWordImageUrl(word.id, imageUrl)
+          } else {
+            console.log(`[ImageService] No image found for: ${word.text}`)
+          }
+        } catch (error) {
+          console.error(`[ImageService] Failed to fetch image for ${word.text}:`, error)
+        }
+        
+        // 每个单词之间延迟 100ms，避免请求过快
+        await this.delay(100)
+      }
+      
+      console.log('[ImageService] Background image fetch completed')
+    }, 100)
+  }
+
+  /**
+   * 更新单词的 imageUrl
+   * @param {string} wordId - 单词 ID
+   * @param {string} imageUrl - 本地图片路径
+   */
+  updateWordImageUrl(wordId, imageUrl) {
+    const books = this.getAllWordBooks()
+    books.forEach(book => {
+      const wordIndex = book.words.findIndex(w => w.id === wordId)
+      if (wordIndex !== -1) {
+        book.words[wordIndex].imageUrl = imageUrl
+        book.updatedAt = Date.now()
+      }
+    })
+    this.saveBooks(books)
+  }
+
+  /**
+   * 延迟函数
+   * @param {number} ms - 毫秒数
+   */
+  delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms))
   }
 }
 
