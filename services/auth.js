@@ -41,19 +41,24 @@ class AuthService {
   }
 
   saveUserInfo(userInfo) {
-    // TODO: 实现
+    StorageService.set(AUTH_KEYS.USER_INFO, userInfo)
   }
 
   getUserInfo() {
-    // TODO: 实现
+    return StorageService.get(AUTH_KEYS.USER_INFO, null)
   }
 
   getDefaultUserInfo() {
-    // TODO: 实现
+    return {
+      avatarUrl: '/assets/icons/default-avatar.png',
+      nickName: '桃桃'
+    }
   }
 
   clearAuth() {
-    // TODO: 实现
+    StorageService.remove(AUTH_KEYS.USER_INFO)
+    StorageService.remove(AUTH_KEYS.OPENID)
+    StorageService.remove(AUTH_KEYS.LOGIN_TIME)
   }
 }
 
