@@ -1,8 +1,10 @@
+const AuthService = require('../../services/auth')
 const StorageService = require('../../utils/storage')
 
 Page({
   data: {
     userInfo: null,
+    isLoggedIn: false,
     level: 99,
     isParentBound: false,
     pronunciationType: 2,
@@ -39,8 +41,50 @@ Page({
   },
 
   loadUserInfo() {
-    const userInfo = wx.getStorageSync('userInfo') || null
+    const userInfo = AuthService.getUserInfo()
+    const isLoggedIn = !!userInfo
+    this.setData({ 
+      userInfo: userInfo || AuthService.getDefaultUserInfo(),
+      isLoggedIn
+    })
+  },
+
+  onChooseAvatar(e) {
+    const { avatarUrl } = e.detail
+    
+    const userInfo = this.data.userInfo || AuthService.getDefaultUserInfo()
+    userInfo.avatarUrl = avatarUrl
+    
+    AuthService.saveUserInfo(userInfo)
     this.setData({ userInfo })
+    
+    wx.showToast({
+      title: '头像已更新',
+      icon: 'success'
+    })
+  },
+
+  onNicknameInput(e) {
+    const nickName = e.detail.value.trim()
+    
+    if (!nickName) {
+      wx.showToast({
+        title: '昵称不能为空',
+        icon: 'none'
+      })
+      return
+    }
+
+    const userInfo = this.data.userInfo || AuthService.getDefaultUserInfo()
+    userInfo.nickName = nickName
+    
+    AuthService.saveUserInfo(userInfo)
+    this.setData({ userInfo })
+    
+    wx.showToast({
+      title: '昵称已更新',
+      icon: 'success'
+    })
   },
 
   loadStats() {
@@ -84,23 +128,6 @@ Page({
     wx.showToast({
       title: '功能开发中',
       icon: 'none'
-    })
-  },
-
-  getUserProfile() {
-    wx.getUserProfile({
-      desc: '用于完善用户资料',
-      success: (res) => {
-        const userInfo = res.userInfo
-        wx.setStorageSync('userInfo', userInfo)
-        this.setData({ userInfo })
-      },
-      fail: () => {
-        wx.showToast({
-          title: '授权已取消',
-          icon: 'none'
-        })
-      }
     })
   }
 })
