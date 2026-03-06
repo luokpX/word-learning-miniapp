@@ -1,3 +1,4 @@
+const AuthService = require('../../services/auth')
 const audioService = require('../../services/audio')
 const wordBookService = require('../../services/wordBook')
 
@@ -22,6 +23,10 @@ Page({
   },
 
   onLoad(options) {
+    // 添加登录检查
+    if (!AuthService.requireAuth(this.route)) {
+      return
+    }
     if (options.words) {
       try {
         const wordList = JSON.parse(decodeURIComponent(options.words))

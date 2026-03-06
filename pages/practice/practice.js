@@ -1,3 +1,4 @@
+const AuthService = require('../../services/auth')
 const wordBookService = require('../../services/wordBook')
 
 Page({
@@ -7,6 +8,10 @@ Page({
   },
 
   onLoad() {
+    // 添加登录检查
+    if (!AuthService.requireAuth(this.route)) {
+      return
+    }
     this.loadWordBooks()
   },
 

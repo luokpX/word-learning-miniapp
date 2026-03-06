@@ -1,3 +1,4 @@
+const AuthService = require('../../services/auth')
 const wordService = require('../../services/word')
 const wordBookService = require('../../services/wordBook')
 const audioService = require('../../services/audio')
@@ -23,6 +24,10 @@ Page({
   },
 
   onLoad(options) {
+    // 添加登录检查
+    if (!AuthService.requireAuth(this.route)) {
+      return
+    }
     const mode = options.mode || 'learn'
     const bookId = options.bookId || ''
     this.setData({ mode, bookId })
