@@ -39,6 +39,14 @@
   <view class="flashcard-container">
     <view class="flashcard {{isFlipped ? 'flipped' : ''}}" bindtap="flipCard">
       <view class="card-front">
+        <!-- 单词图片 -->
+        <image 
+          class="word-image" 
+          src="{{currentWord.imageUrl}}" 
+          mode="aspectFill"
+          wx:if="{{currentWord.imageUrl}}"
+        />
+        
         <view class="word-main">
           <text class="word-text">{{currentWord.text}}</text>
           <text class="word-phonetic">{{currentWord.phonetic}}</text>
