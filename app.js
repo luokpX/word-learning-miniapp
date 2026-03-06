@@ -7,7 +7,10 @@ App({
       learningWords: 0,
       dailyGoal: 20,
       todayStudied: 0
-    }
+    },
+    // Unsplash API 配置
+    unsplashApiKey: 'Iig_zrzRIDqCUH8qvw4e8p5tDC_mttzUw_vx0WvOn2I',
+    unsplashMaxWidth: 400
   },
 
   onLaunch() {
