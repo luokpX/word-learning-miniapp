@@ -46,7 +46,7 @@
   justify-content: center;
   padding: 10rpx;
   padding-top: 15rpx;
-  margin-bottom: -25rpx;
+  margin-bottom: 0;
   min-height: 0;
 }
 
@@ -201,6 +201,7 @@
   justify-content: center;
   gap: 0;
   padding: 0 20rpx;
+  margin-top: 35rpx;
 }
 
 .action-btn {
@@ -260,6 +261,7 @@
   align-items: center;
   gap: 160rpx;
   padding: 30rpx 40rpx 50rpx;
+  margin-top: 35rpx;
 }
 
 .control-btn {
