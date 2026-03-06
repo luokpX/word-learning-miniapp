@@ -1,11 +1,15 @@
 <view class="container">
-  <view class="profile-header">
-    <view class="avatar-section">
+<view class="profile-header">
+  <view class="avatar-section">
+    <!-- 头像选择：使用新的 chooseAvatar 能力 -->
+    <button class="avatar-btn" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
       <image class="avatar" src="{{userInfo.avatarUrl || '/assets/icons/default-avatar.png'}}" mode="aspectFill"></image>
-      <text class="username">{{userInfo.nickName || '桃桃'}}</text>
-      <text class="user-level">Lv.{{level}}</text>
-    </view>
+    </button>
+    <!-- 昵称输入：使用新的 nickname input 能力 -->
+    <input class="nickname-input" type="nickname" value="{{userInfo.nickName || '桃桃'}}" bindblur="onNicknameInput" placeholder="点击设置昵称" />
+    <text class="user-level">Lv.{{level}}</text>
   </view>
+</view>
 
   <view class="stats-overview card">
     <view class="stat-row">
