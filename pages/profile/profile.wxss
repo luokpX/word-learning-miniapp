@@ -17,6 +17,35 @@
   margin-top: -60rpx;
 }
 
+.avatar-btn {
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  line-height: inherit;
+}
+
+.avatar-btn::after {
+  border: none;
+}
+
+.nickname-input {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 10rpx;
+  padding: 10rpx 20rpx;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 20rpx;
+  min-width: 200rpx;
+}
+
+.nickname-input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 28rpx;
+}
+
 .avatar {
   width: 160rpx;
   height: 160rpx;
@@ -24,13 +53,6 @@
   border: 6rpx solid #ffffff;
   background-color: #E8E8E8;
   margin-bottom: 20rpx;
-}
-
-.username {
-  font-size: 40rpx;
-  font-weight: bold;
-  color: #ffffff;
-  margin-bottom: 10rpx;
 }
 
 .user-level {
