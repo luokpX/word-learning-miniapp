@@ -7,6 +7,14 @@
   </view>
 
   <view class="word-card" wx:if="{{!sessionComplete}}">
+    <!-- 图片提示 -->
+    <image 
+      class="hint-image" 
+      src="{{currentWord.imageUrl}}" 
+      mode="aspectFill"
+      wx:if="{{currentWord.imageUrl}}"
+    />
+    
     <view class="word-meaning">{{currentWord.meaning}}</view>
     <view class="word-phonetic-row" wx:if="{{currentWord.phonetic || currentWord.audioUrl}}">
       <text class="word-phonetic" wx:if="{{currentWord.phonetic}}">{{currentWord.phonetic}}</text>
