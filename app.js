@@ -1,6 +1,9 @@
+const AuthService = require('./services/auth')
+
 App({
   globalData: {
     userInfo: null,
+    isLoggedIn: false,
     studyProgress: {
       totalWords: 0,
       masteredWords: 0,
@@ -13,22 +16,22 @@ App({
     unsplashMaxWidth: 400
   },
 
-  onLaunch() {
-    // TODO: Uncomment when using cloud development
-    // wx.cloud.init({
-    //   env: 'your-env-id',
-    //   traceUser: true
-    // })
+  async onLaunch() {
+    // 1. 优先执行登录检查
+    const loginResult = await AuthService.silentLogin()
+    if (loginResult.success) {
+      this.globalData.userInfo = loginResult.userInfo
+      this.globalData.isLoggedIn = true
+      console.log('静默登录成功:', loginResult.userInfo)
+    }
 
-    this.checkLoginStatus()
+    // 2. 加载学习进度
     this.loadStudyProgress()
   },
 
   checkLoginStatus() {
-    const userInfo = wx.getStorageSync('userInfo')
-    if (userInfo) {
-      this.globalData.userInfo = userInfo
-    }
+    // 保留兼容性，实际逻辑已移至 onLaunch
+    return AuthService.checkLoginStatus()
   },
 
   loadStudyProgress() {
