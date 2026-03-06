@@ -8,11 +8,32 @@ const AUTH_KEYS = {
 
 class AuthService {
   async checkLoginStatus() {
-    // TODO: 实现
+    try {
+      const userInfo = StorageService.get(AUTH_KEYS.USER_INFO, null)
+      if (!userInfo) {
+        return false
+      }
+
+      const sessionValid = await this.checkSessionValid()
+      if (!sessionValid) {
+        this.clearAuth()
+        return false
+      }
+
+      return true
+    } catch (error) {
+      console.error('checkLoginStatus error:', error)
+      return false
+    }
   }
 
   checkSessionValid() {
-    // TODO: 实现
+    return new Promise((resolve) => {
+      wx.checkSession({
+        success: () => resolve(true),
+        fail: () => resolve(false)
+      })
+    })
   }
 
   async silentLogin() {
