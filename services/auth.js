@@ -60,6 +60,32 @@ class AuthService {
     StorageService.remove(AUTH_KEYS.OPENID)
     StorageService.remove(AUTH_KEYS.LOGIN_TIME)
   }
+
+  requireAuth(currentPage) {
+    const publicPages = ['/pages/index/index', '/pages/profile/profile']
+
+    if (publicPages.includes(currentPage)) {
+      return true
+    }
+
+    if (!this.getUserInfo()) {
+      wx.showModal({
+        title: '需要登录',
+        content: '请先登录以继续使用',
+        confirmText: '去登录',
+        success: (res) => {
+          if (res.confirm) {
+            wx.switchTab({
+              url: '/pages/profile/profile'
+            })
+          }
+        }
+      })
+      return false
+    }
+
+    return true
+  }
 }
 
 module.exports = new AuthService()
