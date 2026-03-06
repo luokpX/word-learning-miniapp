@@ -56,7 +56,7 @@
         <image 
           class="word-image" 
           src="{{currentWord.imageUrl}}" 
-          mode="aspectFill"
+          mode="aspectFit"
           wx:if="{{currentWord.imageUrl}}"
         />
         <text class="flip-hint">点击卡片查看释义</text>
